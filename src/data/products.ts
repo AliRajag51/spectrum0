@@ -1,4 +1,19 @@
-export const products = [
+/* Spectrum's offline catalogue snapshot: what the storefront shows while
+   WOOCOMMERCE_CATALOG_ENABLED is off or the store cannot be reached. Prices
+   here are display-only; the cart is always priced by WooCommerce. */
+export type SnapshotProduct = {
+  id: string;
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  image: string;
+  badge: string | null;
+  variants: { id: string; label: string; price: number; compareAt?: number; inStock: boolean }[];
+  defaultVariant: number;
+};
+
+export const snapshotProducts: SnapshotProduct[] = [
   {
     id: "1",
     slug: "5-amino-1-mq",
@@ -756,9 +771,3 @@ export const products = [
     defaultVariant: 0,
   },
 ];
-
-export const getProductBySlug = (slug) =>
-  products.find((product) => product.slug === slug);
-
-export const getFeaturedProducts = () =>
-  products.filter((product) => product.badge === "Featured");

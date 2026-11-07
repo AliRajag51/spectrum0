@@ -1,0 +1,25 @@
+/* Loaded only on WooCommerce checkout, order payment and order received pages.
+   Keep wp_head/wp_footer and WooCommerce's payment and receipt hooks intact.
+   Match site chrome only, never headers inside checkout or order details.
+
+   The tpc-* selectors are this site's theme (TPC Storefront), which renders
+   <header class="tpc-header">, <footer class="tpc-footer"> and a promo bar
+   above both. The generic names below matched none of them, so this file
+   loaded and hid nothing. The generic names stay for the next storefront. */
+body :is(
+  #masthead,
+  #colophon,
+  .site-header,
+  .site-footer,
+  .tpc-header,
+  .tpc-footer,
+  .tpc-promo,
+  .elementor-location-header,
+  .elementor-location-footer,
+  .wp-site-blocks > header.wp-block-template-part,
+  .wp-site-blocks > footer.wp-block-template-part,
+  .nvm-bar,
+  .nvm-foot
+) {
+  display: none !important;
+}

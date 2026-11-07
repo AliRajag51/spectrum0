@@ -1,0 +1,1055 @@
+/*
+ * Checkout and order-received skin.
+ *
+ * STRUCTURE ONLY. Every colour, size, radius and font in this file reads a
+ * custom property, and every one of those is emitted by PHP from a filterable
+ * array. To brand a new site you change the tokens, not this file — see
+ * nvm_checkout_skin_tokens in includes/checkout-skin.php.
+ *
+ * Written against WooCommerce's CLASSIC checkout markup ([woocommerce_checkout]
+ * and templates/checkout/thankyou.php) rather than the Checkout block. The block
+ * renders through React and its wc-block-components-* class names move between
+ * WooCommerce releases; the classic markup has been stable for years, which is
+ * what makes a stylesheet worth carrying to the next site.
+ */
+
+/* ------------------------------------------------------------------ shell */
+
+/*
+ * WooCommerce styles its own form fields, and it wins.
+ * ".woocommerce form .form-row .input-text" is three classes and a type; the
+ * skin's ".nvm-skin .input-text" is two classes, so on the classic checkout
+ * every field kept WooCommerce's 4px corner and its #000 text no matter what
+ * the skin asked for. Rather than escalate selectors and have to keep winning
+ * that argument, feed WooCommerce the tokens: its rules read these variables,
+ * so setting them here makes its own stylesheet follow these tokens.
+ */
+:root {
+  --wc-form-border-radius: var(--nvm-radius-field);
+  --wc-form-border-color: var(--nvm-line-strong);
+  --wc-form-border-width: 1px;
+  --wc-form-color-text: var(--nvm-ink);
+  --wc-form-color-background: var(--nvm-surface);
+}
+
+.nvm-skin *,
+.nvm-skin *::before,
+.nvm-skin *::after { box-sizing: border-box; }
+
+.nvm-skin {
+  margin: 0;
+  padding: 0;
+  background: var(--nvm-page);
+  color: var(--nvm-ink);
+  font-family: var(--nvm-font);
+  font-size: var(--nvm-size);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nvm-skin img { max-width: 100%; height: auto; }
+.nvm-skin a { color: var(--nvm-brand); }
+
+/* A single column that everything lines up to. */
+.nvm-wrap {
+  width: 100%;
+  max-width: var(--nvm-maxw);
+  margin-inline: auto;
+  padding-inline: var(--nvm-gut);
+}
+
+/* ------------------------------------------------------------------- bar */
+
+/*
+ * The theme's header and footer are never rendered — this template replaces the
+ * document, it does not hide parts of one. What is left is a wordmark and a way
+ * to reach a human, because those are the only two things a person needs while
+ * paying, and every other link is a way to lose them.
+ */
+.nvm-bar {
+  background: var(--nvm-brand);
+  border-bottom: 1px solid var(--nvm-accent-line);
+}
+
+.nvm-bar__in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--nvm-bar-h);
+}
+
+.nvm-bar__mark { display: inline-flex; align-items: center; text-decoration: none; }
+.nvm-bar__mark img { display: block; height: var(--nvm-logo-h); width: auto; }
+
+.nvm-bar__mark-text {
+  color: var(--nvm-on-brand);
+  font-size: var(--nvm-logo-text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.nvm-bar__help {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nvm-on-brand-soft);
+  font-size: var(--nvm-size-sm);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nvm-bar__help:hover { color: var(--nvm-accent); }
+.nvm-bar__help svg { width: 15px; height: 15px; flex: none; }
+
+/* --------------------------------------------------------------- masthead */
+
+/*
+ * Out of sight, not out of the document. A heading that is display:none is gone
+ * for a screen reader and for search too; this one is still announced and still
+ * the page's h1, it simply is not painted.
+ */
+.nvm-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nvm-head { padding-top: var(--nvm-space-lg); }
+
+/* With the title hidden the eyebrow is carrying the top of the page on its own,
+   so it should not also be carrying the title's bottom margin. */
+.nvm-head--bare { padding-top: 0; }
+.nvm-head--bare .nvm-head__eyebrow { margin-bottom: var(--nvm-space); }
+
+.nvm-head__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--nvm-muted);
+  font-size: var(--nvm-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.nvm-head__eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--nvm-accent-deep);
+}
+
+.nvm-head__title {
+  margin: 0;
+  font-size: var(--nvm-h1);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  color: var(--nvm-ink);
+  text-wrap: balance;
+}
+
+.nvm-head__sub {
+  margin: 12px 0 0;
+  max-width: 60ch;
+  color: var(--nvm-muted);
+  font-size: var(--nvm-size);
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------------ body */
+
+/* With the bar off there is nothing between the browser chrome and the first
+   line of the page, so the top padding has to do that work itself. When the bar
+   is switched back on it already provides that separation. */
+.nvm-body { padding-block: var(--nvm-space-xl) var(--nvm-space-xl); }
+.nvm-bar + .nvm-body { padding-top: var(--nvm-space-lg); }
+
+/* --------------------------------------------------------------- surfaces */
+
+/*
+ * One card treatment, used by the form panels, the order table and every block
+ * on the thank-you page. Consistency here is most of what makes the two pages
+ * look like one product.
+ */
+.nvm-skin .nvm-card,
+.nvm-skin #customer_details .col-1,
+.nvm-skin #customer_details .col-2,
+.nvm-skin .woocommerce-order-details,
+.nvm-skin .woocommerce-customer-details,
+.nvm-skin .woocommerce-order-downloads {
+  background: var(--nvm-surface);
+  border: 1px solid var(--nvm-line);
+  border-radius: var(--nvm-radius);
+  padding: var(--nvm-pad);
+}
+
+/*
+ * Themes wrap the order review in a panel of their own.
+ *
+ * Blocksy puts a .ct-order-review around it with 35px of padding and a 2px
+ * border, so our white card sat inset inside a second, wider box — which is
+ * exactly the "too much padding around a small white div" it looks like.
+ *
+ * The :has() rule handles it without naming a theme: it matches whatever
+ * element is the direct parent of our column, whichever theme put it there,
+ * and flattens it. The Blocksy class is listed too, as a plain fallback for
+ * browsers without :has(). If the parent turns out to be the form itself — the
+ * case on a theme that adds no wrapper — the rule is harmless, because the form
+ * carries no padding, border or background to begin with.
+ */
+.nvm-skin form.checkout *:has(> .nvm-col-side),
+.nvm-skin form.checkout *:has(> .nvm-col-form),
+.nvm-skin .ct-order-review {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/*
+ * The summary is ONE box, and the box is the column.
+ *
+ * It used to be the heading sitting on the page with a separate card under it
+ * holding the table — two edges, and a white panel inset inside a wider region
+ * that read as heavy padding around a small card. Carding the column instead
+ * puts "Your order" inside the panel, which is also what the left-hand side
+ * already does with "Billing details", so the two columns finally match.
+ *
+ * Its own padding is tighter than --nvm-pad: this column is a list of figures,
+ * not a form, and does not need a form's breathing room.
+ */
+.nvm-skin .nvm-col-side {
+  background: var(--nvm-surface);
+  border: 1px solid var(--nvm-line);
+  border-radius: var(--nvm-radius);
+  padding: var(--nvm-pad-side);
+}
+
+.nvm-skin .nvm-col-side #order_review_heading { margin-bottom: 14px; }
+
+/* …and the thing inside it is no longer a box at all. */
+.nvm-skin #order_review {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* WooCommerce ships these as floated halves. */
+.nvm-skin #customer_details,
+.nvm-skin #customer_details .col-1,
+.nvm-skin #customer_details .col-2 {
+  float: none;
+  width: auto;
+}
+
+/* ------------------------------------------------------------------ grid */
+
+/*
+ * Two columns on a desktop, form then summary.
+ *
+ * The grid goes on WooCommerce's own <form class="checkout">, not on a wrapper
+ * of ours. Everything the classic checkout renders — billing, shipping, the
+ * review heading and the review table — is inside that one element, so there is
+ * no honest place to put a wrapper between them without rebuilding the template
+ * and inheriting the job of keeping it current.
+ *
+ * The summary is sticky because a long form otherwise scrolls the total out of
+ * sight, and the total is the one number somebody checks as they type.
+ */
+/*
+ * Exactly two children, courtesy of the wrappers the plugin adds on
+ * woocommerce_checkout_before_customer_details and its siblings. Two children
+ * means no item spans a row — which is what stops the grid sharing the tall
+ * details column's height with the row holding "Your order", and leaving the
+ * review table stranded a few hundred pixels below its own heading.
+ */
+.nvm-skin form.checkout.woocommerce-checkout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: var(--nvm-gap);
+  align-items: start;
+}
+
+.nvm-skin .nvm-col-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvm-gap);
+  min-width: 0;
+}
+
+.nvm-skin .nvm-col-form #customer_details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvm-gap);
+}
+
+/* Sticky, because a long form otherwise scrolls the total out of sight and the
+   total is the one number somebody is checking as they type. */
+.nvm-skin .nvm-col-side {
+  position: sticky;
+  top: var(--nvm-space);
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .nvm-skin form.checkout.woocommerce-checkout { grid-template-columns: minmax(0, 1fr); }
+  .nvm-skin .nvm-col-side { position: static; }
+}
+
+/* --------------------------------------------------------------- headings */
+
+/*
+ * font-family is declared here and not only on the body. Themes style headings
+ * separately from body copy — this one sets a serif on h1–h6 — and a heading
+ * inherits that rule, not ours, however specific the body selector is. Setting
+ * size without family produced a page of correctly sized Times.
+ */
+.nvm-skin h1,
+.nvm-skin h2,
+.nvm-skin h3,
+.nvm-skin h4 {
+  font-family: var(--nvm-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+}
+
+/* Legends and field labels stay in the body family. They are read, not stamped,
+   and the condensed uppercase display voice costs legibility in a form. */
+.nvm-skin legend,
+.nvm-skin label {
+  font-family: var(--nvm-font);
+}
+
+.nvm-skin h3,
+.nvm-skin #order_review_heading,
+.nvm-skin .woocommerce-column__title,
+.nvm-skin .woocommerce-order-details__title,
+.nvm-skin .woocommerce-customer-details h2,
+.nvm-skin #customer_details h3,
+.nvm-skin form.checkout h3 {
+  margin: 0 0 var(--nvm-space);
+  font-family: var(--nvm-font-display);
+  font-size: var(--nvm-h3);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--nvm-ink);
+}
+
+/* The shipping toggle is an <h3> wrapping a checkbox, so it needs the heading
+   treatment and a usable target in the same rule. */
+.nvm-skin #ship-to-different-address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.nvm-skin #ship-to-different-address input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--nvm-brand);
+  cursor: pointer;
+}
+.nvm-skin #ship-to-different-address span { cursor: pointer; }
+
+/* The review heading sits outside the panel in WooCommerce's markup. */
+.nvm-skin #order_review_heading { margin-bottom: 12px; }
+
+/* ----------------------------------------------------------------- fields */
+
+.nvm-skin .form-row {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 14px;
+  padding: 0;
+  width: auto;
+  float: none;
+}
+
+.nvm-skin .form-row label {
+  order: 1;
+  margin: 0 0 7px;
+  font-size: var(--nvm-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nvm-muted);
+}
+
+.nvm-skin .form-row .required { color: var(--nvm-danger); text-decoration: none; }
+.nvm-skin .form-row .optional { color: var(--nvm-muted-soft); }
+
+.nvm-skin .form-row .woocommerce-input-wrapper { order: 2; width: 100%; }
+
+.nvm-skin .input-text,
+.nvm-skin select,
+.nvm-skin textarea,
+.nvm-skin .select2-container .select2-selection--single {
+  width: 100%;
+  height: var(--nvm-field-h);
+  padding: 0 16px;
+  border: 1px solid var(--nvm-line-strong);
+  border-radius: var(--nvm-radius-field);
+  background: var(--nvm-surface);
+  color: var(--nvm-ink);
+  font-family: inherit;
+  font-size: var(--nvm-size);
+  line-height: var(--nvm-field-h);
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.nvm-skin textarea {
+  height: auto;
+  min-height: 104px;
+  padding: 13px 16px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.nvm-skin .input-text:focus,
+.nvm-skin select:focus,
+.nvm-skin textarea:focus {
+  border-color: var(--nvm-brand);
+  box-shadow: 0 0 0 3px var(--nvm-focus);
+}
+
+.nvm-skin .form-row.woocommerce-invalid .input-text,
+.nvm-skin .form-row.woocommerce-invalid select {
+  border-color: var(--nvm-danger);
+}
+
+/* Two-up on the name row and anything WooCommerce marks as a half. */
+.nvm-skin .form-row-first,
+.nvm-skin .form-row-last {
+  display: inline-flex;
+  width: calc(50% - 7px);
+  vertical-align: top;
+}
+.nvm-skin .form-row-first { margin-right: 12px; }
+
+@media (max-width: 560px) {
+  .nvm-skin .form-row-first,
+  .nvm-skin .form-row-last { width: 100%; margin-right: 0; }
+}
+
+/* select2, which WooCommerce uses for country and state. */
+.nvm-skin .select2-container--default .select2-selection--single { display: flex; align-items: center; }
+.nvm-skin .select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 0;
+  line-height: inherit;
+  color: var(--nvm-ink);
+}
+.nvm-skin .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  right: 12px;
+}
+.nvm-skin .select2-dropdown {
+  border-color: var(--nvm-line-strong);
+  border-radius: var(--nvm-radius-field);
+  overflow: hidden;
+}
+.nvm-skin .select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background: var(--nvm-brand);
+}
+
+/* ------------------------------------------------------------------ table */
+
+/*
+ * !important on width for the same reason as the notices: the block theme
+ * sizes tables from its own stylesheet and wins on specificity, which left the
+ * order table at its natural 721px inside a 1092px card — a third of the panel
+ * empty. Everything else here is ordinary cascade.
+ */
+.nvm-skin .shop_table,
+.nvm-skin table.shop_table {
+  width: 100% !important;
+  max-width: none !important;
+  border-collapse: collapse;
+  border: 0;
+  margin: 0;
+  table-layout: auto;
+}
+
+.nvm-skin .shop_table th,
+.nvm-skin .shop_table td {
+  padding: 13px 0;
+  border: 0;
+  border-bottom: 1px solid var(--nvm-line);
+  text-align: left;
+  vertical-align: top;
+  font-size: var(--nvm-size-sm);
+}
+
+.nvm-skin .shop_table thead th {
+  padding-top: 0;
+  font-size: var(--nvm-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nvm-muted);
+}
+
+.nvm-skin .shop_table td:last-child,
+.nvm-skin .shop_table th:last-child { text-align: right; }
+
+.nvm-skin .shop_table .product-name { color: var(--nvm-ink); font-weight: 500; }
+
+/*
+ * Checkout line: a small image, then the name.
+ *
+ * inline-flex, not flex — WooCommerce prints the quantity as a sibling straight
+ * after the name, and a block-level wrapper drops "× 1" onto its own line.
+ */
+.nvm-skin .nvm-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  vertical-align: middle;
+}
+
+.nvm-skin .nvm-line__thumb {
+  flex: none;
+  width: var(--nvm-thumb);
+  height: var(--nvm-thumb);
+  border-radius: 9px;
+  border: 1px solid var(--nvm-line);
+  background: var(--nvm-surface);
+  object-fit: cover;
+}
+
+.nvm-skin .nvm-line__name { min-width: 0; }
+
+/*
+ * The order-received table keeps WooCommerce's meta list, because that page is
+ * the customer's record of what they bought and the size belongs on it. Hidden
+ * only if a variation slips through where it is not wanted — kept as CSS rather
+ * than a filter, since the filter that produces this also feeds order emails.
+ */
+.nvm-skin .nvm-hide-item-meta .wc-item-meta,
+.nvm-skin .nvm-hide-item-meta .variation { display: none; }
+.nvm-skin .shop_table .product-quantity { color: var(--nvm-muted); font-weight: 400; }
+
+.nvm-skin .shop_table tfoot th,
+.nvm-skin .shop_table tfoot td {
+  font-size: var(--nvm-size-sm);
+  font-weight: 500;
+  color: var(--nvm-muted);
+}
+
+/* ------------------------------------------------------------- shipping */
+
+/*
+ * The shipping row is the one row that is not a label and an amount, and it has
+ * two different shapes in the wild:
+ *
+ *   WooCommerce  <th>Shipping</th><td><ul id="shipping_method">…</ul></td>
+ *   Blocksy      <td colspan="2"><div class="ct-shipping-heading">…</div><ul>…</ul></td>
+ *
+ * Both are handled. The right-alignment every other cell wants is wrong here:
+ * it pushed the heading and a column of radio buttons to the far edge, reading
+ * right-to-left against their own labels.
+ *
+ * Nothing below counts the options. They are <li> in one list, so one, two or
+ * six rates all lay out the same and a rate added later needs no change here.
+ */
+.nvm-skin .woocommerce-shipping-totals td,
+.nvm-skin tr.shipping td,
+.nvm-skin tr.shipping th {
+  text-align: left !important;
+}
+
+.nvm-skin .ct-shipping-heading,
+.nvm-skin tr.shipping > th {
+  display: block;
+  margin: 0 0 10px;
+  font-size: var(--nvm-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nvm-muted);
+}
+
+.nvm-skin ul#shipping_method,
+.nvm-skin ul.woocommerce-shipping-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nvm-skin ul#shipping_method li,
+.nvm-skin ul.woocommerce-shipping-methods li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: left;
+}
+
+.nvm-skin ul#shipping_method input[type="radio"],
+.nvm-skin ul.woocommerce-shipping-methods input[type="radio"] {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--nvm-brand);
+  cursor: pointer;
+}
+
+/* These are choices, not field labels, so they do not take the uppercase
+   treatment the form labels get. */
+.nvm-skin ul#shipping_method label,
+.nvm-skin ul.woocommerce-shipping-methods label {
+  margin: 0;
+  font-size: var(--nvm-size-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--nvm-ink);
+  cursor: pointer;
+}
+
+/* A shop with exactly one rate shows it as plain text, not a radio. */
+.nvm-skin .woocommerce-shipping-totals td > p,
+.nvm-skin tr.shipping td > p {
+  margin: 0;
+  font-size: var(--nvm-size-sm);
+  color: var(--nvm-ink);
+}
+
+/* The grand total is the line people look for. */
+.nvm-skin .shop_table tfoot .order-total th,
+.nvm-skin .shop_table tfoot .order-total td {
+  border-bottom: 0;
+  padding-top: 16px;
+  font-size: var(--nvm-total);
+  font-weight: 600;
+  color: var(--nvm-ink);
+}
+.nvm-skin .shop_table tfoot .order-total .amount { color: var(--nvm-brand); }
+
+.nvm-skin .shop_table tbody tr:last-child td { border-bottom: 1px solid var(--nvm-line); }
+
+/* ---------------------------------------------------------------- payment */
+
+.nvm-skin #payment {
+  background: transparent;
+  border-radius: 0;
+  margin-top: var(--nvm-space);
+}
+
+.nvm-skin #payment ul.payment_methods {
+  list-style: none;
+  margin: 0 0 var(--nvm-space);
+  padding: 0;
+  border: 0;
+}
+
+.nvm-skin #payment ul.payment_methods li {
+  margin: 0 0 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--nvm-line-strong);
+  border-radius: var(--nvm-radius-field);
+  background: var(--nvm-surface);
+  transition: border-color .18s ease, background-color .18s ease;
+}
+
+.nvm-skin #payment ul.payment_methods li label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: var(--nvm-size);
+  font-weight: 500;
+  color: var(--nvm-ink);
+  cursor: pointer;
+}
+
+.nvm-skin #payment ul.payment_methods li input[type="radio"] { accent-color: var(--nvm-brand); }
+
+.nvm-skin #payment div.payment_box {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--nvm-radius-field);
+  background: var(--nvm-tint);
+  color: var(--nvm-muted);
+  font-size: var(--nvm-size-sm);
+}
+.nvm-skin #payment div.payment_box::before { display: none; }
+.nvm-skin #payment div.payment_box p:last-child { margin-bottom: 0; }
+
+/* ---------------------------------------------------------------- buttons */
+
+.nvm-skin .button,
+.nvm-skin button.button,
+.nvm-skin input.button,
+.nvm-skin #place_order,
+.nvm-skin .nvm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: var(--nvm-btn-h);
+  padding: 0 26px;
+  border: 0;
+  /* Not radius-pill. DESIGN.md's One-Pill Rule keeps 999px for the dose pill and
+     the cart count disc alone, and the page-07 comp draws its CTAs with corners
+     near-square. A fully rounded Place order button was the checkout quietly
+     disagreeing with every button on the storefront it hands off from. */
+  border-radius: var(--nvm-radius-field);
+  background: var(--nvm-brand);
+  color: var(--nvm-on-brand);
+  font-family: inherit;
+  font-size: var(--nvm-size);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.nvm-skin .button:hover,
+.nvm-skin #place_order:hover,
+.nvm-skin .nvm-btn:hover {
+  background: var(--nvm-brand-hover);
+  box-shadow: 0 16px 34px -18px var(--nvm-brand-shadow);
+}
+
+.nvm-skin #place_order {
+  width: 100%;
+  margin-top: 4px;
+  height: var(--nvm-btn-h-lg);
+  font-size: var(--nvm-size-lg);
+}
+
+.nvm-skin .nvm-btn--ghost {
+  background: transparent;
+  color: var(--nvm-brand);
+  border: 1px solid var(--nvm-line-strong);
+}
+.nvm-skin .nvm-btn--ghost:hover {
+  background: var(--nvm-tint);
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------- notices */
+
+.nvm-skin .woocommerce-notices-wrapper:empty { display: none; }
+
+/*
+ * !important, deliberately and only here. WooCommerce ships its own notice
+ * styling — a blue banner with an inline SVG — from a stylesheet we do not
+ * control and cannot reliably out-specify across versions. A skin whose entire
+ * job is to win the cascade may say so on the handful of properties that carry
+ * the brand; it is not licence to sprinkle it elsewhere in this file.
+ */
+.nvm-skin .woocommerce-message,
+.nvm-skin .woocommerce-info,
+.nvm-skin .woocommerce-error {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  list-style: none;
+  margin: 0 0 var(--nvm-space) !important;
+  padding: 14px 18px !important;
+  border: 1px solid var(--nvm-line) !important;
+  border-left: 3px solid var(--nvm-brand) !important;
+  border-radius: var(--nvm-radius-field) !important;
+  background: var(--nvm-surface) !important;
+  color: var(--nvm-ink) !important;
+  font-size: var(--nvm-size-sm);
+  box-shadow: none !important;
+}
+
+.nvm-skin .woocommerce-message::before,
+.nvm-skin .woocommerce-info::before,
+.nvm-skin .woocommerce-error::before { display: none !important; }
+
+/* The banner icon is a real <svg>, so it is recoloured rather than hidden. */
+.nvm-skin .woocommerce-message > svg,
+.nvm-skin .woocommerce-info > svg,
+.nvm-skin .woocommerce-error > svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: var(--nvm-accent-deep);
+}
+.nvm-skin .woocommerce-error > svg { fill: var(--nvm-danger); }
+
+.nvm-skin .woocommerce-info a,
+.nvm-skin .woocommerce-message a {
+  color: var(--nvm-brand);
+  font-weight: 600;
+}
+
+.nvm-skin .woocommerce-error { border-left-color: var(--nvm-danger); }
+.nvm-skin .woocommerce-error li { margin: 0; }
+
+/*
+ * WooCommerce renders classic-checkout notices with its BLOCKS notice component
+ * — .wc-block-components-notice-banner, not .woocommerce-info — so the classic
+ * selectors above never touch the coupon bar, which stayed WooCommerce blue on
+ * an otherwise finished page. Both names are styled because which one you get
+ * depends on the WooCommerce version, and a skin meant for the next site should
+ * not care.
+ */
+.nvm-skin .wc-block-components-notice-banner {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 var(--nvm-space) !important;
+  padding: 14px 18px !important;
+  border: 1px solid var(--nvm-line) !important;
+  border-left: 3px solid var(--nvm-accent-deep) !important;
+  border-radius: var(--nvm-radius-field) !important;
+  background: var(--nvm-surface) !important;
+  color: var(--nvm-ink) !important;
+  font-size: var(--nvm-size-sm);
+  box-shadow: none !important;
+}
+
+.nvm-skin .wc-block-components-notice-banner.is-error { border-left-color: var(--nvm-danger) !important; }
+.nvm-skin .wc-block-components-notice-banner.is-success { border-left-color: var(--nvm-brand) !important; }
+
+/*
+ * wc-blocks.css paints this icon as a filled disc - background-color plus a 50%
+ * radius - and tints it per notice type, #007cba for is-info. Setting fill alone
+ * put a rust glyph on a blue coin, which is how a finished cream-and-rust page
+ * still had a WooCommerce-blue dot as the first thing on it. The disc goes; the
+ * glyph carries the colour.
+ */
+.nvm-skin .wc-block-components-notice-banner > svg {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  background: none !important;
+  border-radius: 0 !important;
+  fill: var(--nvm-accent-deep);
+}
+.nvm-skin .wc-block-components-notice-banner.is-error > svg { fill: var(--nvm-danger); }
+.nvm-skin .wc-block-components-notice-banner.is-success > svg { fill: var(--nvm-brand); }
+
+.nvm-skin .wc-block-components-notice-banner__content { padding: 0; }
+.nvm-skin .wc-block-components-notice-banner a { color: var(--nvm-brand); font-weight: 600; }
+
+/*
+ * The bridge's "Back to shop" pill. It is not decoration — it returns through
+ * /?nvm-cart-return=1, which re-syncs the cart the storefront is holding — so it
+ * stays, but it was sitting mid-page over the form. Moved to the corner and put
+ * in brand colours.
+ */
+.nvm-skin a[href*="nvm-cart-return"] {
+  left: auto !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  background: var(--nvm-surface) !important;
+  color: var(--nvm-brand) !important;
+  border: 1px solid var(--nvm-line-strong);
+  border-radius: var(--nvm-radius-field) !important;
+  padding: 10px 18px !important;
+  font: 600 13px/1 var(--nvm-font) !important;
+  box-shadow: 0 10px 30px -14px rgba(4, 8, 16, .35) !important;
+}
+
+.nvm-skin .checkout_coupon {
+  margin: 0 0 var(--nvm-space);
+  padding: var(--nvm-pad);
+  border: 1px solid var(--nvm-line);
+  border-radius: var(--nvm-radius);
+  background: var(--nvm-surface);
+}
+.nvm-skin .checkout_coupon .form-row { display: inline-flex; width: auto; margin-right: 10px; }
+
+/* ------------------------------------------------- login / privacy blocks */
+
+.nvm-skin .woocommerce-form-login {
+  margin: 0 0 var(--nvm-space);
+  padding: var(--nvm-pad);
+  border: 1px solid var(--nvm-line);
+  border-radius: var(--nvm-radius);
+  background: var(--nvm-surface);
+}
+
+.nvm-skin .woocommerce-privacy-policy-text {
+  color: var(--nvm-muted);
+  font-size: var(--nvm-size-sm);
+}
+
+/* -------------------------------------------------------- thank-you page */
+
+/*
+ * The confirmation leads with the fact that it worked. WooCommerce's default
+ * puts that in a paragraph the same size as everything else, which is why the
+ * first thing people do on this page is squint for it.
+ */
+.nvm-receipt { text-align: center; padding-block: var(--nvm-space-lg) var(--nvm-space); }
+
+.nvm-receipt__tick {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--nvm-space);
+  border-radius: 50%;
+  background: var(--nvm-brand);
+  color: var(--nvm-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nvm-receipt__tick svg { width: 28px; height: 28px; }
+
+.nvm-skin .woocommerce-thankyou-order-received,
+.nvm-receipt__title {
+  margin: 0;
+  font-size: var(--nvm-h1);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  color: var(--nvm-ink);
+  text-wrap: balance;
+}
+
+.nvm-receipt__sub {
+  margin: 14px auto 0;
+  max-width: 54ch;
+  color: var(--nvm-muted);
+  text-wrap: pretty;
+}
+
+/* The order facts, as a row of plain figures rather than a bulleted list. */
+.nvm-skin ul.woocommerce-thankyou-order-details,
+.nvm-skin ul.order_details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  /*
+   * Hairlines come from borders on the cells, not from a 1px gap over a tinted
+   * container. The gap trick is neater to write and shows its own background
+   * wherever a row is short — five facts in a two-column grid left a grey
+   * rectangle sitting in the last row looking like a broken cell.
+   */
+  gap: 0;
+  list-style: none;
+  margin: var(--nvm-space-lg) 0 0;
+  padding: 0;
+  border: 1px solid var(--nvm-line);
+  border-radius: var(--nvm-radius);
+  background: var(--nvm-surface);
+  overflow: hidden;
+  text-align: left;
+}
+
+.nvm-skin ul.woocommerce-thankyou-order-details li,
+.nvm-skin ul.order_details li {
+  margin: 0;
+  padding: 16px 18px;
+  border: 0;
+  border-right: 1px solid var(--nvm-line);
+  border-bottom: 1px solid var(--nvm-line);
+  background: var(--nvm-surface);
+  font-size: var(--nvm-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nvm-muted);
+}
+
+.nvm-skin ul.woocommerce-thankyou-order-details li strong,
+.nvm-skin ul.order_details li strong {
+  display: block;
+  margin-top: 7px;
+  font-size: var(--nvm-size);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--nvm-ink);
+  /* An email address has no break opportunity and is the widest thing on this
+     page — it ran 53px past its cell and was cut mid-domain. */
+  overflow-wrap: anywhere;
+}
+
+.nvm-receipt-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--nvm-gap);
+  margin-top: var(--nvm-gap);
+}
+
+.nvm-skin .woocommerce-customer-details address {
+  font-style: normal;
+  border: 0;
+  padding: 0;
+  color: var(--nvm-muted);
+  font-size: var(--nvm-size-sm);
+  line-height: 1.7;
+}
+
+.nvm-skin .woocommerce-order-downloads__title { margin-top: 0; }
+
+.nvm-receipt__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: var(--nvm-space-lg);
+}
+
+/* ------------------------------------------------------------------ foot */
+
+.nvm-foot {
+  padding-block: var(--nvm-space) var(--nvm-space-lg);
+  border-top: 1px solid var(--nvm-line);
+  color: var(--nvm-muted-soft);
+  font-size: var(--nvm-size-xs);
+}
+
+.nvm-foot__in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
+}
+
+.nvm-foot__right {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Contact lives here now that the bar is off. It is the one link on the page
+   that is not the order, so it stays reachable rather than disappearing with
+   the header it used to sit in. */
+.nvm-foot__help {
+  color: var(--nvm-brand) !important;
+  font-weight: 600;
+}
+
+.nvm-foot a { color: var(--nvm-muted); text-decoration: none; }
+.nvm-foot a:hover { color: var(--nvm-brand); text-decoration: underline; }
+
+/* ------------------------------------------------------------ small print */
+
+@media (max-width: 600px) {
+  .nvm-skin .shop_table thead { display: none; }
+  .nvm-receipt__tick { width: 54px; height: 54px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nvm-skin * { transition: none !important; animation: none !important; }
+}
