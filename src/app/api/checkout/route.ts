@@ -12,7 +12,6 @@ import {
 } from "@/server/account/session";
 import { readViewer } from "@/server/account/service";
 import { readCart } from "@/server/cart/service";
-import { storefrontCheckoutOn } from "@/server/checkout-owner";
 import { accountsConfigured } from "@/server/wordpress/bridge";
 import { handoff, memberHandoffJar } from "@/server/wordpress/handoff";
 import { checkoutRequiresAccount } from "@/server/wordpress/checkout-policy";
@@ -68,13 +67,6 @@ const forgetSession = (host: string) => [
 ];
 
 export async function GET(request: Request) {
-  /* The storefront's own checkout, when Headless Core says so ("Use the
-     storefront's own checkout"). Every cart button already points here, so
-     this one line moves them all, and switching it off again restores the
-     WooCommerce handoff below untouched. Off for now (the agency, Oct 26):
-     Tagada's Apple Pay covers peptidescollective.com and es., not www. */
-  if (await storefrontCheckoutOn()) return go("/checkout");
-
   if (!env.NVM_BRIDGE_KEY || !env.WOOCOMMERCE_URL) {
     return go("/cart?checkout=unavailable&reason=not_configured");
   }

@@ -78,6 +78,11 @@ export const env = createEnv({
   client: {
     // Absolute origin (no trailing slash) for canonical links and the sitemap.
     NEXT_PUBLIC_SITE_URL: z.string().url(),
+    // Cloudflare Turnstile site key for the contact form. The site plugin
+    // verifies the token, so the form cannot send without one.
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
+    // The support address the contact page shows beside the form.
+    NEXT_PUBLIC_CONTACT_EMAIL: z.string().email().optional(),
   },
   runtimeEnv: {
     VERCEL_ENV: process.env.VERCEL_ENV,
@@ -97,6 +102,8 @@ export const env = createEnv({
     STOREFRONT_CONTRACT: process.env.STOREFRONT_CONTRACT,
     STOREFRONT_INDEXING_ENABLED: process.env.STOREFRONT_INDEXING_ENABLED,
     NEXT_PUBLIC_SITE_URL: resolveSiteUrl(),
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+    NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
   },
   emptyStringAsUndefined: true,
 });

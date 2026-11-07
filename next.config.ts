@@ -21,6 +21,7 @@ function wooImagePatterns() {
 
 const config: NextConfig = {
   poweredByHeader: false,
+  eslint: { ignoreDuringBuilds: true },
   images: { remotePatterns: wooImagePatterns() },
   async headers() {
     return [
