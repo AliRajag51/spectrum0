@@ -58,7 +58,7 @@ export default function CartSuggestions() {
               type="button"
               disabled={!available || busy}
               onClick={() => void addItem(product, variant, 1)}
-              className="mt-2 flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-[#0b1b3f] text-[11px] font-semibold text-white transition-colors hover:bg-[#2463a9] disabled:cursor-not-allowed disabled:opacity-40"
+              className="mt-2 flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-primary text-[11px] font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Plus size={13} /> {available ? "Add" : "Unavailable"}
             </button>
