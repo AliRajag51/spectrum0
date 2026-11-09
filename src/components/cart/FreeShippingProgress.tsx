@@ -2,11 +2,21 @@
 
 import { Truck, Check } from "lucide-react";
 
-import { CART_SETTINGS, formatCartMoney, useCart } from "@/context/CartContext";
+import { formatCartMoney, useCart } from "@/context/CartContext";
 
-export default function FreeShippingProgress({ compact = false }: { compact?: boolean }) {
-  const { remaining, freeShippingProgress, qualifiesForFreeShipping } =
-    useCart();
+export default function FreeShippingProgress({
+  compact = false,
+}: {
+  compact?: boolean;
+}) {
+  const {
+    remaining,
+    freeShippingProgress,
+    qualifiesForFreeShipping,
+    freeShippingThreshold,
+  } = useCart();
+  // No free-shipping rule in WooCommerce (or the store is unreachable): no promise.
+  if (freeShippingThreshold === null) return null;
 
   return (
     <div
@@ -57,8 +67,7 @@ export default function FreeShippingProgress({ compact = false }: { compact?: bo
           </div>
 
           <p className="mt-2 font-sans text-xs text-white/90">
-            Free shipping over{" "}
-            {formatCartMoney(CART_SETTINGS.freeShippingThreshold)} · Before
+            Free shipping over {formatCartMoney(freeShippingThreshold)} · Before
             taxes
           </p>
         </div>

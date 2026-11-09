@@ -9,6 +9,7 @@ import { ProductsProvider } from "@/components/providers/ProductsProvider";
 import { env } from "@/env";
 import { getStorefrontProducts } from "@/server/catalog";
 import { indexingEnabled } from "@/server/indexing";
+import { getFreeShippingThreshold } from "@/server/shipping-rule";
 import { T3Provider } from "@/trpc/react";
 import "@/styles/globals.css";
 
@@ -35,15 +36,22 @@ const bodyFont = DM_Sans({
   display: "swap",
 });
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const products = await getStorefrontProducts();
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [products, freeShippingThreshold] = await Promise.all([
+    getStorefrontProducts(),
+    getFreeShippingThreshold(),
+  ]);
   return (
     <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
       <body className="antialiased">
         <T3Provider>
           <ProductsProvider products={products}>
             <ResearcherGate />
-            <CartShell>
+            <CartShell freeShippingThreshold={freeShippingThreshold}>
               <Header />
               {children}
               <Footer />

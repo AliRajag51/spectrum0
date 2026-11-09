@@ -25,9 +25,6 @@ import { useTRPC } from "@/trpc/react";
 
 export const CART_SETTINGS = {
   currency: "USD",
-  /* WooCommerce's cart does not publish a free-shipping threshold, so the
-     storefront keeps its own advertised one. */
-  freeShippingThreshold: 150,
 } as const;
 
 /** Dollars (major units) to the display string the cart UI uses. */
@@ -91,6 +88,8 @@ type CartContextValue = {
   remaining: number;
   freeShippingProgress: number;
   qualifiesForFreeShipping: boolean;
+  /** WooCommerce's free-shipping threshold in dollars, or null when the store has none. */
+  freeShippingThreshold: number | null;
   /** WooCommerce's cart, for surfaces that need more than the lines. */
   cart: Cart;
 };
@@ -145,7 +144,14 @@ const messageOf = (cause: unknown) =>
   (cause as { message?: string } | null)?.message ||
   "Your cart could not be updated. Please try again.";
 
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CartProvider({
+  children,
+  freeShippingThreshold = null,
+}: {
+  children: ReactNode;
+  /** WooCommerce's own rule (server/shipping-rule.ts); null hides the meter. */
+  freeShippingThreshold?: number | null;
+}) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
@@ -203,7 +209,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     trpc.cart.update.mutationOptions({
       scope: { id: "cart" },
       onMutate: (variables) =>
-        begin((current) => withQuantity(current, variables.key, variables.quantity)),
+        begin((current) =>
+          withQuantity(current, variables.key, variables.quantity),
+        ),
       onSuccess: settle,
       onError: (cause, _variables, snapshot) => rollBack(cause, snapshot),
     }),
@@ -211,7 +219,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const removeMutation = useMutation(
     trpc.cart.remove.mutationOptions({
       scope: { id: "cart" },
-      onMutate: (variables) => begin((current) => withQuantity(current, variables.key, 0)),
+      onMutate: (variables) =>
+        begin((current) => withQuantity(current, variables.key, 0)),
       onSuccess: settle,
       onError: (cause, _variables, snapshot) => rollBack(cause, snapshot),
     }),
@@ -249,7 +258,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       /* The offline snapshot carries no WooCommerce ids: there is nothing to
          add a line against until the live catalogue is on. */
       if (!variant.externalId) {
-        setError("Online ordering is not available yet. Please check back soon.");
+        setError(
+          "Online ordering is not available yet. Please check back soon.",
+        );
         setIsOpen(true);
         return false;
       }
@@ -271,11 +282,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     (key: string, quantity: number) => {
       const next = Math.floor(Number(quantity));
       if (!Number.isFinite(next)) return;
-      updateLine({ key, quantity: Math.max(0, Math.min(MAX_LINE_QUANTITY, next)) });
+      updateLine({
+        key,
+        quantity: Math.max(0, Math.min(MAX_LINE_QUANTITY, next)),
+      });
     },
     [updateLine],
   );
-  const removeItem = useCallback((key: string) => removeLine({ key }), [removeLine]);
+  const removeItem = useCallback(
+    (key: string) => removeLine({ key }),
+    [removeLine],
+  );
   const clearCart = useCallback(() => clearLines(), [clearLines]);
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
@@ -284,9 +301,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const items = useMemo(() => cart.lines.map(toItem), [cart.lines]);
   const subtotal = cart.subtotal / 100;
   const itemCount = cart.itemCount;
-  const threshold = CART_SETTINGS.freeShippingThreshold;
-  const remaining = Math.max(0, threshold - subtotal);
-  const freeShippingProgress = Math.min(100, (subtotal / threshold) * 100);
+  const threshold = freeShippingThreshold;
+  const remaining = threshold ? Math.max(0, threshold - subtotal) : 0;
+  const freeShippingProgress = threshold
+    ? Math.min(100, (subtotal / threshold) * 100)
+    : 0;
   const busy =
     addMutation.isPending ||
     updateMutation.isPending ||
@@ -311,7 +330,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       itemCount,
       remaining,
       freeShippingProgress,
-      qualifiesForFreeShipping: remaining <= 0,
+      qualifiesForFreeShipping: threshold !== null && remaining <= 0,
+      freeShippingThreshold: threshold,
       cart,
     }),
     [
