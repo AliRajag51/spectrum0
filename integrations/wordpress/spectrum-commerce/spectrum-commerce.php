@@ -61,6 +61,9 @@ TPC_Checkout_Chrome::boot();
 require_once __DIR__ . '/includes/class-tpc-bundle-save.php';
 TPC_Bundle_Save::boot();
 
+require_once __DIR__ . '/includes/class-tpc-free-shipping-only.php';
+TPC_Free_Shipping_Only::boot();
+
 require_once __DIR__ . '/includes/class-tpc-stock-alerts.php';
 TPC_Stock_Alerts::boot();
 register_activation_hook( __FILE__, array( 'TPC_Stock_Alerts', 'install' ) );
