@@ -75,6 +75,9 @@ register_activation_hook( __FILE__, array( 'TPC_Product_Contract', 'install' ) )
 require_once __DIR__ . '/includes/class-tpc-gate-allowlist.php';
 TPC_Gate_Allowlist::boot();
 
+require_once __DIR__ . '/includes/class-tpc-subscribers.php';
+TPC_Subscribers::boot();
+
 require_once __DIR__ . '/includes/class-tpc-form-bridge.php';
 TPC_Form_Bridge::boot();
 

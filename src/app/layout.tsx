@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, DM_Sans } from "next/font/google";
 import CartShell from "@/components/cart/CartShell";
+import EmailPopup from "@/components/EmailPopup";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ResearcherGate from "@/components/ResearcherGate";
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <Header />
               {children}
               <Footer />
+              <EmailPopup />
             </CartShell>
           </ProductsProvider>
         </T3Provider>

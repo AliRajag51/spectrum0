@@ -73,9 +73,7 @@ export async function subscribeNewsletter(
     return {
       status: "subscribed" as const,
       message:
-        value.locale === "es"
-          ? "Revisa tu correo para recibir tu oferta de bienvenida."
-          : "Check your email for your welcome offer.",
+        value.locale === "es" ? "Te has suscrito correctamente." : "You're subscribed.",
     };
   } catch (error) {
     friendlyBridgeFailure(
