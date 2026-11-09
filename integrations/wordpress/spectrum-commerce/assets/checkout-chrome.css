@@ -5,7 +5,11 @@
    The tpc-* selectors are this site's theme (TPC Storefront), which renders
    <header class="tpc-header">, <footer class="tpc-footer"> and a promo bar
    above both. The generic names below matched none of them, so this file
-   loaded and hid nothing. The generic names stay for the next storefront. */
+   loaded and hid nothing. The generic names stay for the next storefront.
+
+   .nvm-bar and .nvm-foot are NVM Headless Core's checkout skin's own header
+   and footer (the Spectrum logo and "Need help?"); hiding them here cancelled
+   the skin's bar, so they are no longer listed. */
 body :is(
   #masthead,
   #colophon,
@@ -17,9 +21,22 @@ body :is(
   .elementor-location-header,
   .elementor-location-footer,
   .wp-site-blocks > header.wp-block-template-part,
-  .wp-site-blocks > footer.wp-block-template-part,
-  .nvm-bar,
-  .nvm-foot
+  .wp-site-blocks > footer.wp-block-template-part
 ) {
   display: none !important;
+}
+
+/* The skin paints its bar in the brand colour, which is also the button colour.
+   Spectrum's logo is dark plum and gold, so on that bar it all but vanished.
+   A white bar with a hairline, as the storefront's own header, keeps the logo
+   legible without touching the buttons. */
+.nvm-skin .nvm-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--nvm-line);
+}
+.nvm-skin .nvm-bar__help {
+  color: var(--nvm-muted);
+}
+.nvm-skin .nvm-bar__help:hover {
+  color: var(--nvm-brand);
 }
