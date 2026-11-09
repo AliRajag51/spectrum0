@@ -3,7 +3,7 @@ import "server-only";
 import { z } from "zod";
 import { env } from "@/env";
 import { randomBytes } from "node:crypto";
-import { CART_ID_COOKIE, emptyJar, jarFromIdentity, jarIdentity, type CartJar } from "@/lib/cart-jar";
+import { CART_ID_COOKIE, emptyJar, jarFromIdentity, jarIdentity, tokenJar, type CartJar } from "@/lib/cart-jar";
 import { publicWordPressUrl, wordPressStoreUrl } from "@/lib/wp-urls";
 import { BridgeError, bridgeRequest } from "@/server/wordpress/bridge";
 import { storeRequest } from "@/server/wordpress/store-api";
@@ -174,7 +174,12 @@ export type Adoption = {
 export async function redeemReturnCode(code: string): Promise<Adoption> {
   const payload = await bridgeRequest("redeem-code", { code }, (value) => adoption.parse(value));
   return {
-    jar: payload.identity ? jarFromIdentity(payload.identity, payload.cart_token) : null,
+    // A native WooCommerce store answers with the Cart-Token alone (no cookie identity).
+    jar: payload.identity
+      ? jarFromIdentity(payload.identity, payload.cart_token)
+      : payload.cart_token
+        ? tokenJar(payload.cart_token)
+        : null,
     orderCompleted: payload.order_completed,
   };
 }

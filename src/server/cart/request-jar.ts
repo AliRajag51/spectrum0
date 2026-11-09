@@ -8,7 +8,7 @@ import {
   readCartJar,
 } from "@/lib/cart-cookie";
 import { adoptAnswer, adoptGuestCart } from "@/lib/cart-adoption";
-import { hasIdentity, isMemberJar, type CartJar } from "@/lib/cart-jar";
+import { hasCartIdentity, isMemberJar, type CartJar } from "@/lib/cart-jar";
 import { requestHost } from "@/lib/storefront-cookie-domain";
 import type { TRPCContext } from "@/server/api/context";
 import { CartError, type CartResult } from "@/server/cart/service";
@@ -69,7 +69,7 @@ function persist(ctx: TRPCContext, jar: CartJar | null, count: number) {
   const secret = cartSecret();
   if (!secret) return;
   const host = requestHost(ctx.request.headers);
-  if (hasIdentity(jar) || isMemberJar(jar)) {
+  if (hasCartIdentity(jar) || isMemberJar(jar)) {
     for (const header of cartCookieHeaders({ jar, auth: ctx.auth, count, secret, host })) {
       ctx.resHeaders.append("set-cookie", header);
     }

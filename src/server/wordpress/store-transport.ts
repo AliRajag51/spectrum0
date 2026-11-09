@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { absorbResponse, emptyJar, hasIdentity, isMemberJar, jarCookieHeader, type CartJar } from "../../lib/cart-jar.ts";
+import { absorbResponse, emptyJar, hasCartIdentity, isMemberJar, jarCookieHeader, type CartJar } from "../../lib/cart-jar.ts";
 import { tokenLost } from "../../lib/cart-session.ts";
 import { plainText } from "../../lib/plain-text.ts";
 
@@ -410,7 +410,7 @@ export async function runCartRequest(
    * was unreachable already; nothing that could have been kept is lost.
    */
   const refused = result.outcome === "bootstrap" || result.outcome === "token_lost";
-  if (refused && hasIdentity(jar) && request.body !== undefined) {
+  if (refused && hasCartIdentity(jar) && request.body !== undefined) {
     return runLadder(config, emptyJar(), request);
   }
   return result;
@@ -427,7 +427,7 @@ async function runLadder(
   let result: StoreOutcome;
 
   // A member's basket is found by the member header: there is nothing to bootstrap.
-  if (!hasIdentity(current) && !isMemberJar(current) && !isRead) {
+  if (!hasCartIdentity(current) && !isMemberJar(current) && !isRead) {
     const [opening, write] = await Promise.all([
       storeCall(config, read(current), { route: "cart" }),
       storeCall(config, current, request),

@@ -49,9 +49,24 @@ export const isMemberJar = (jar: CartJar | null | undefined): jar is CartJar & {
 /** A member's jar: no guest cookies, the basket is found by the member header. */
 export const memberJar = (count = 0): CartJar => ({ v: 1, member: true, count });
 
-/** Whether this jar names a shopper WordPress would recognise. */
+/** Whether this jar carries the `tpc_cid` cookie identity (stores running tpc-store). */
 export const hasIdentity = (jar: CartJar | null | undefined): jar is CartJar & { cid: string } =>
   Boolean(jar?.cid);
+
+/**
+ * Whether this jar names a basket WordPress would recognise, by either scheme.
+ *
+ * A store running tpc-store keys carts on the `tpc_cid` cookie. A store on
+ * WooCommerce's own session handler (Spectrum) keys them on the Store API
+ * `Cart-Token`, a signed JWT naming the session, and sets no cookie the jar
+ * would keep. Treating only the cookie as identity meant a native store's
+ * basket was never written back to the browser and every page saw it empty.
+ */
+export const hasCartIdentity = (jar: CartJar | null | undefined): jar is CartJar =>
+  Boolean(jar?.cid || jar?.token);
+
+/** A jar for a store that keys carts on the Cart-Token alone. */
+export const tokenJar = (token: string, count = 0): CartJar => ({ v: 1, token, count });
 
 const KEY_INFO = "pc-wp-jar-v1";
 const IV_BYTES = 12;

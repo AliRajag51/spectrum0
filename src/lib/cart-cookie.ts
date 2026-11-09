@@ -21,7 +21,7 @@ import {
   CART_JAR_TTL_SECONDS,
   decodeJar,
   encodeJar,
-  hasIdentity,
+  hasCartIdentity,
   isMemberJar,
   type CartJar,
 } from "./cart-jar.ts";
@@ -109,7 +109,7 @@ export function readCartJar(
   const jar = decodeJar(readCookie(cookieHeader, CART_JAR_COOKIE), secret);
   // A member jar has no guest identity by design; the owner binding above
   // already refused it to anyone but that member.
-  return hasIdentity(jar) || (isMemberJar(jar) && Boolean(auth)) ? jar : null;
+  return hasCartIdentity(jar) || (isMemberJar(jar) && Boolean(auth)) ? jar : null;
 }
 
 export type CartHint = { version: 1; count: number; verifiedAt: number };
