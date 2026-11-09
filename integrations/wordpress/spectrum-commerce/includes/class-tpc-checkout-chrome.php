@@ -6,6 +6,13 @@ final class TPC_Checkout_Chrome {
 
 	public static function boot(): void {
 		add_action( 'wp_enqueue_scripts', array( self::class, 'enqueue' ), 100 );
+		// NVM Headless Core's checkout skin names DM Sans and Sora in its tokens
+		// (option nvm_checkout_skin_tokens); WordPress has to load them itself.
+		add_filter( 'nvm_checkout_skin_webfont', array( self::class, 'webfont' ) );
+	}
+
+	public static function webfont(): string {
+		return 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap';
 	}
 
 	public static function applies(): bool {
