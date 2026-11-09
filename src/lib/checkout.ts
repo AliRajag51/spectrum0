@@ -136,7 +136,7 @@ export function versionAtLeast(version: string, minimum: number[]) {
 export function isLiveStore(url: string | undefined): boolean {
   if (!url) return false;
   try {
-    return /^(?:www\.)?spectrumbioscience\.com$/i.test(new URL(url).hostname);
+    return /^(?:www\.)?spectrumbiosciences\.shop$/i.test(new URL(url).hostname);
   } catch {
     // An address that cannot be read is treated as live: test mode stays off.
     return true;

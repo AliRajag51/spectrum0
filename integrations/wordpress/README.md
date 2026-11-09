@@ -24,7 +24,7 @@ Set `_tpc_product_key` meta on a product to override.
 
 1. Zip `spectrum-commerce/` and `nvm-headless-bridge/`, upload and activate both.
 2. WooCommerce → Storefront sync:
-   - `tpc_storefront_url`: the storefront origin, e.g. `https://www.spectrumbioscience.com`
+   - `tpc_storefront_url`: the storefront origin, e.g. `https://www.spectrumbiosciences.shop`
    - `tpc_storefront_webhook_secret`: same value as `WOOCOMMERCE_WEBHOOK_SECRET` on Vercel
 3. WooCommerce → Headless Core:
    - Production storefront: the storefront origin

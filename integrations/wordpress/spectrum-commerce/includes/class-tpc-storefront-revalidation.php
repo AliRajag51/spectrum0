@@ -609,7 +609,7 @@ final class TPC_Storefront_Revalidation {
 		echo '<form method="post" action="' . $post . '"><input type="hidden" name="action" value="' . esc_attr( self::ACTION_SAVE ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		wp_nonce_field( self::ACTION_SAVE );
 		echo '<table class="form-table" role="presentation"><tr><th scope="row"><label for="tpc-storefront-url">' . esc_html__( 'Storefront URL', 'peptide-collective-commerce' ) . '</label></th><td>';
-		echo '<input type="url" id="tpc-storefront-url" name="url" class="regular-text code" value="' . esc_attr( $config['url'] ) . '" placeholder="https://www.spectrumbioscience.com"' . disabled( $config['url_from_constant'], true, false ) . '>';
+		echo '<input type="url" id="tpc-storefront-url" name="url" class="regular-text code" value="' . esc_attr( $config['url'] ) . '" placeholder="https://www.spectrumbiosciences.shop"' . disabled( $config['url_from_constant'], true, false ) . '>';
 		$hint = $config['url_from_constant']
 			? esc_html__( 'Set by TPC_STOREFRONT_URL in wp-config.php.', 'peptide-collective-commerce' )
 			: ( $config['url_from_core']

@@ -55,8 +55,8 @@ final class TPC_Form_Bridge {
 	public static function contact_hostnames( $hosts ): array {
 		$hosts = is_array( $hosts ) ? $hosts : array();
 		$storefront_hosts = array(
-			'spectrumbioscience.com',
-			'www.spectrumbioscience.com',
+			'spectrumbiosciences.shop',
+			'www.spectrumbiosciences.shop',
 		);
 		foreach ( $storefront_hosts as $hostname ) {
 			if ( ! in_array( $hostname, $hosts, true ) ) {
