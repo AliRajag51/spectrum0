@@ -25,8 +25,8 @@ const AUTO_OPEN_DELAY_MS = 14000;
 const QUIET_ROUTES = ["/cart", "/checkout", "/account"];
 
 const VIALS = [
-  { src: "/products/BPC-157.webp", tilt: -12, delay: 0 },
-  { src: "/products/tb-500.webp", tilt: 12, delay: -2.1 },
+  { src: "/assets/cta-1.png", tilt: -12, delay: 0 },
+  { src: "/assets/cta-2.png", tilt: 12, delay: -2.1 },
 ] as const;
 
 const read = (storage: () => Storage, key: string) => {
@@ -153,7 +153,7 @@ export default function EmailPopup() {
                 className={`${styles.vial} ${index === 0 ? styles.vialLeft : styles.vialRight}`}
                 style={{ "--tilt": `${vial.tilt}deg`, animationDelay: `${vial.delay}s` } as CSSProperties}
               >
-                <Image alt="" src={vial.src} width={240} height={240} sizes="72px" draggable={false} />
+                <Image alt="" src={vial.src} width={240} height={476} sizes="48px" draggable={false} />
               </span>
             ))}
           </div>

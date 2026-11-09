@@ -44,7 +44,8 @@ export default function FloatingCart() {
       tabIndex={isOpen ? -1 : 0}
       className={[
         "group fixed right-[max(16px,env(safe-area-inset-right))] z-[56] flex items-center gap-2.5 rounded-full",
-        "bg-primary py-2 pr-2 pl-2 text-white sm:pr-4",
+        "bg-primary p-2 text-white",
+        count > 0 ? "sm:pr-4" : "",
         "shadow-[0_18px_40px_-14px_rgba(53,20,62,0.6)] ring-1 ring-white/15",
         "transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#35143E]",
         "focus-visible:outline-secondary focus-visible:outline-3 focus-visible:outline-offset-3",
@@ -63,14 +64,16 @@ export default function FloatingCart() {
           </span>
         )}
       </span>
-      <span className="hidden flex-col items-start leading-tight sm:flex">
-        <span className="text-[11px] font-medium text-white/70">
-          {count > 0 ? "Your cart" : "Cart"}
+      {count > 0 && (
+        <span className="hidden flex-col items-start leading-tight sm:flex">
+          <span className="text-[11px] font-medium text-white/70">
+            Your cart
+          </span>
+          <span className="font-heading text-sm font-bold">
+            {formatCartMoney(subtotal)}
+          </span>
         </span>
-        <span className="font-heading text-sm font-bold">
-          {count > 0 ? formatCartMoney(subtotal) : "Empty"}
-        </span>
-      </span>
+      )}
     </button>
   );
 }

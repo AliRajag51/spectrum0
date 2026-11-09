@@ -112,7 +112,7 @@
   position: absolute;
   display: block;
   top: 22px;
-  width: 72px;
+  width: 48px;
   transform: rotate(var(--tilt));
   animation: vialFloat 4.2s ease-in-out infinite;
 }
@@ -333,7 +333,7 @@
     height: 100px;
   }
   .vial {
-    width: 58px;
+    width: 40px;
   }
   .vialLeft {
     left: 16px;
