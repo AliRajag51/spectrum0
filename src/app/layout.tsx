@@ -5,15 +5,22 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ResearcherGate from "@/components/ResearcherGate";
 import { ProductsProvider } from "@/components/providers/ProductsProvider";
+import { env } from "@/env";
 import { getStorefrontProducts } from "@/server/catalog";
+import { indexingEnabled } from "@/server/indexing";
 import { T3Provider } from "@/trpc/react";
 import "@/styles/globals.css";
 
-export const metadata: Metadata = {
-  title: "Spectrum Biosciences | Premium Research Peptides",
-  description:
-    "Explore premium research peptides from Spectrum Biosciences. Discover precision-focused products developed for laboratory research.",
-};
+export function generateMetadata(): Metadata {
+  const indexable = indexingEnabled();
+  return {
+    metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
+    title: "Spectrum Biosciences | Premium Research Peptides",
+    description:
+      "Explore premium research peptides from Spectrum Biosciences. Discover precision-focused products developed for laboratory research.",
+    robots: { index: indexable, follow: indexable },
+  };
+}
 
 const headingFont = Sora({
   subsets: ["latin"],
