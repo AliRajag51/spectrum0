@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
   title: "Frequently Asked Questions | Spectrum Biosciences",
@@ -83,8 +84,35 @@ const groups = [
 export default function FAQsPage() {
   return (
     <main className="min-h-screen bg-white">
-      <header className="border-b border-[#EEE6EF] px-4 py-6 sm:px-6 md:py-12 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+      <header className="relative isolate min-h-110 overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 md:py-10 lg:min-h-90 lg:px-8">
+        {/* BACKGROUND IMAGES */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          {/* MOBILE ONLY */}
+          <Image
+            src="/assets/faq-banner-mobile.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 639px) 100vw, 1px"
+            className="object-cover object-center sm:hidden"
+          />
+
+          {/* TABLET + DESKTOP */}
+          <div
+            className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
+            style={{
+              backgroundImage: "url('/assets/faq-banner.png')",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center center",
+            }}
+          />
+        </div>
+
+        {/* SOFT WHITE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
+
+        {/* HEADER CONTENT */}
+        <div className="relative z-10 mx-auto max-w-7xl">
           <nav
             aria-label="Breadcrumb"
             className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
@@ -92,18 +120,23 @@ export default function FAQsPage() {
             <Link href="/" className="hover:text-primary">
               Home
             </Link>
+
             <ChevronRight size={13} />
+
             <span className="text-primary font-semibold">FAQs</span>
           </nav>
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
             Helpful information
           </p>
+
           <h1 className="section-heading">
-            Frequently Asked <span className="text-secondary">Questions.</span>
+            Frequently Asked <span className="text-gold">Questions.</span>
           </h1>
-          <p className="text-md mt-3 max-w-xl text-[#817586]">
-            Everything you need to know about our research collection, ordering,
-            and product documentation.
+
+          <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
+            Find answers to common questions about our products, orders,
+            shipping, payments, and everything you need to know.
           </p>
         </div>
       </header>
@@ -168,7 +201,7 @@ export default function FAQsPage() {
 
             <section className="flex flex-col justify-between gap-5 rounded-[22px] border border-[#EEE6EF] p-6 sm:flex-row sm:items-center sm:p-8">
               <div>
-                <p className="text-secondary text-[11px] font-bold tracking-[0.14em] uppercase">
+                <p className="text-gold text-[11px] font-bold tracking-[0.14em] uppercase">
                   Need more help?
                 </p>
 

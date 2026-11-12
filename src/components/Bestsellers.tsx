@@ -70,7 +70,7 @@ function BestsellerCard({ product }: { product: StorefrontProduct }) {
                 {variant?.label || "Research Product"}
               </span>
 
-              <span className="bg-primary group-hover:bg-secondary flex h-10 w-10 items-center justify-center rounded-full text-white shadow-[0_8px_20px_rgba(85,32,95,0.2)] transition-all duration-300 group-hover:rotate-45">
+              <span className="bg-primary group-hover:bg-gold flex h-10 w-10 items-center justify-center rounded-full text-white shadow-[0_8px_20px_rgba(85,32,95,0.2)] transition-all duration-300 group-hover:rotate-45">
                 <ArrowUpRight size={20} />
               </span>
             </div>
@@ -79,14 +79,14 @@ function BestsellerCard({ product }: { product: StorefrontProduct }) {
 
         <div className="px-2 pt-5">
           <div className="mb-2 flex items-center gap-2">
-            <span className="bg-secondary h-1.5 w-1.5 rounded-full" />
+            <span className="bg-gold h-1.5 w-1.5 rounded-full" />
 
             <span className="text-muted font-sans text-[10px] font-semibold tracking-[0.12em] uppercase">
               {product.category || "Research Peptides"}
             </span>
           </div>
 
-          <h3 className="font-heading text-primary group-hover:text-secondary text-[17px] leading-[1.3] font-bold tracking-[-0.045em] transition-colors duration-300 sm:text-[20px]">
+          <h3 className="font-heading text-primary group-hover:text-gold text-[17px] leading-[1.3] font-bold tracking-[-0.045em] transition-colors duration-300 sm:text-[20px]">
             {product.name}
           </h3>
 
@@ -113,7 +113,7 @@ function BestsellerCard({ product }: { product: StorefrontProduct }) {
               </div>
             </div>
 
-            <span className="text-primary group-hover:text-secondary font-sans text-sm font-semibold transition-colors">
+            <span className="text-primary group-hover:text-gold font-sans text-sm font-semibold transition-colors">
               View Product
             </span>
           </div>
@@ -149,18 +149,18 @@ export default function Bestsellers({
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-[650px]">
-            <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
               {isProductPage ? "Continue Exploring" : "Explore Spectrum"}
             </p>
 
             <h2 id="bestsellers-title" className="section-heading">
               {isProductPage ? (
                 <>
-                  Related <span className="text-secondary">Compounds.</span>
+                  Related <span className="text-gold">Compounds.</span>
                 </>
               ) : (
                 <>
-                  Research <span className="text-secondary">Favorites.</span>
+                  Research <span className="text-gold">Favorites.</span>
                 </>
               )}
             </h2>

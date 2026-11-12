@@ -89,7 +89,7 @@ function DesktopTimeline({ containerRef, pathRef }: TimelineProps) {
         <path
           d={desktopPath}
           fill="none"
-          stroke="#F47735"
+          stroke="#DA981B"
           strokeOpacity="0.12"
           strokeWidth="2.5"
         />
@@ -98,7 +98,7 @@ function DesktopTimeline({ containerRef, pathRef }: TimelineProps) {
           ref={pathRef}
           d={desktopPath}
           fill="none"
-          stroke="#F47735"
+          stroke="#DA981B"
           strokeWidth="3"
           strokeLinecap="round"
         />
@@ -116,7 +116,7 @@ function DesktopTimeline({ containerRef, pathRef }: TimelineProps) {
               top: `${(step.y / 360) * 100}%`,
             }}
           >
-            <div className="absolute top-0 left-0 z-20 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white bg-[#F47735] shadow-[0_0_0_1px_rgba(244,119,53,0.18)]" />
+            <div className="absolute top-0 left-0 z-20 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white bg-[#DA981B] shadow-[0_0_0_1px_rgba(244,119,53,0.18)]" />
 
             <div className="absolute top-5 left-1/2 w-[180px] -translate-x-1/2 xl:w-[205px]">
               <div className="relative">
@@ -161,7 +161,7 @@ function MobileTimeline({ containerRef, pathRef }: TimelineProps) {
         <path
           d={mobilePath}
           fill="none"
-          stroke="#F47735"
+          stroke="#DA981B"
           strokeOpacity="0.12"
           strokeWidth="2"
         />
@@ -170,7 +170,7 @@ function MobileTimeline({ containerRef, pathRef }: TimelineProps) {
           ref={pathRef}
           d={mobilePath}
           fill="none"
-          stroke="#F47735"
+          stroke="#DA981B"
           strokeWidth="2.5"
           strokeLinecap="round"
         />
@@ -186,7 +186,7 @@ function MobileTimeline({ containerRef, pathRef }: TimelineProps) {
               className="mobile-step relative flex h-[124px] w-full items-center pr-1 pl-[105px] sm:pl-[125px]"
             >
               <span
-                className="bg-secondary absolute top-1/2 z-10 h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white shadow-[0_0_0_1px_rgba(244,119,53,0.2)]"
+                className="bg-gold absolute top-1/2 z-10 h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white shadow-[0_0_0_1px_rgba(244,119,53,0.2)]"
                 style={{ left: `${step.mobileX}px` }}
               />
 
@@ -232,7 +232,7 @@ function TabletTimeline({ containerRef, pathRef }: TimelineProps) {
         <path
           d="M400 35 C470 90 470 140 400 160 S330 250 400 270 S470 360 400 380 S330 470 400 490 S470 550 400 560"
           fill="none"
-          stroke="#F47735"
+          stroke="#DA981B"
           strokeOpacity="0.12"
           strokeWidth="3"
         />
@@ -240,7 +240,7 @@ function TabletTimeline({ containerRef, pathRef }: TimelineProps) {
           ref={pathRef}
           d="M400 35 C470 90 470 140 400 160 S330 250 400 270 S470 360 400 380 S330 470 400 490 S470 550 400 560"
           fill="none"
-          stroke="#F47735"
+          stroke="#DA981B"
           strokeWidth="3"
           strokeLinecap="round"
         />
@@ -371,13 +371,17 @@ export default function HowItWorks() {
     >
       <div className="relative mx-auto max-w-7xl">
         <header className="relative z-10 max-w-[720px]">
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
             From Order to Delivery
           </p>
 
           <h2 id="how-it-works-title" className="section-heading">
-            How It <span className="text-secondary">Works.</span>
+            How It <span className="text-gold">Works.</span>
           </h2>
+          <div
+            aria-hidden="true"
+            className="my-2 h-[3px] w-28 rounded-full bg-linear-to-r from-[#A87516] via-[#FFE49A] to-[#E4A60C] shadow-[0_0_10px_rgba(228,166,12,0.2)]"
+          />
 
           <p className="text-muted text-md mt-3 max-w-[540px] font-sans">
             From placing your order to receiving tracking information, discover

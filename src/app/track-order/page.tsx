@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Check,
   CheckCircle2,
+  ChevronRight,
   LockKeyhole,
   Mail,
   Package,
@@ -99,19 +100,67 @@ export default function OrderTracker() {
 
   return (
     <main className="">
-      <section className="px-4 py-6 sm:px-6 lg:px-10 md:py-12">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+      <header className="relative isolate min-h-110 overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 md:py-10 lg:min-h-90 lg:px-8">
+        {/* BACKGROUND IMAGES */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          {/* MOBILE ONLY */}
+          <Image
+            src="/assets/order-banner-mobile.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 639px) 100vw, 1px"
+            className="object-cover object-center sm:hidden"
+          />
+
+          {/* TABLET + DESKTOP */}
+          <div
+            className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
+            style={{
+              backgroundImage: "url('/assets/order-banner.png')",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center center",
+            }}
+          />
+        </div>
+
+        {/* SOFT WHITE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
+
+        {/* HEADER CONTENT */}
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
+          >
+            <Link href="/" className="hover:text-primary">
+              Home
+            </Link>
+
+            <ChevronRight size={13} />
+
+            <span className="text-primary font-semibold">Track Order</span>
+          </nav>
+
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            Track Your Order
+          </p>
+
+          <h1 className="section-heading">
+            Track your order, <span className="text-gold">live.</span>
+          </h1>
+
+          <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
+            Enter your order number and the email you used at checkout. We'll
+            show the information available in our order system.
+          </p>
+        </div>
+      </header>
+
+      <section className="px-4 py-6 sm:px-6 md:py-12 lg:px-10">
+        <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
           <div className="min-w-0">
-            <h1 className="section-heading">
-              Track your order, <span className="text-primary">live.</span>
-            </h1>
-
-            <p className="mt-5 max-w-[620px] text-sm text-[#687087]">
-              Enter your order number and the email you used at checkout. We&apos;ll
-              show the information available in our order system.
-            </p>
-
-            <div className="mt-8 rounded-[22px] border border-[#E3E3EC] bg-white p-5 shadow-[0_20px_45px_rgba(25,30,55,0.07)] sm:p-7">
+            <div className="rounded-[22px] border border-[#E3E3EC] bg-white p-5 shadow-[0_20px_45px_rgba(25,30,55,0.07)] sm:p-7">
               <div className="mb-6 flex items-center gap-3">
                 <span className="text-primary flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#F1E5F4]">
                   <Package size={23} strokeWidth={1.7} />
@@ -185,7 +234,7 @@ export default function OrderTracker() {
                 <button
                   type="submit"
                   disabled={phase === "loading"}
-                  className="bg-primary mt-5 flex h-13 w-full items-center justify-center gap-3 rounded-full px-6 text-sm font-bold text-white transition-colors hover:bg-[#35143E] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="btn-gradient mt-5 w-full"
                 >
                   {phase === "loading"
                     ? "Finding your order..."

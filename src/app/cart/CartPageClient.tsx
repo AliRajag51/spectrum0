@@ -42,19 +42,19 @@ function EmptyCart() {
             <ShoppingBag size={43} strokeWidth={1.3} className="text-primary" />
           </div>
 
-          <span className="bg-secondary absolute -top-2 -right-2 flex h-9 w-9 items-center justify-center rounded-full text-white shadow-lg">
+          <span className="bg-gold absolute -top-2 -right-2 flex h-9 w-9 items-center justify-center rounded-full text-white shadow-lg">
             <Sparkles size={17} />
           </span>
         </div>
 
         {/* CONTENT */}
 
-        <span className="text-secondary mb-3 font-sans text-[10px] font-bold tracking-[0.18em] uppercase">
+        <span className="text-gold mb-3 font-sans text-[10px] font-bold tracking-[0.18em] uppercase">
           Your Research Collection Awaits
         </span>
 
         <h2 className="font-heading text-[clamp(26px,4vw,36px)] leading-tight font-bold tracking-[-0.055em] text-[#29232D]">
-          Your Cart Is Empty<span className="text-secondary">.</span>
+          Your Cart Is Empty<span className="text-gold">.</span>
         </h2>
 
         <p className="mt-4 max-w-[380px] font-sans text-[13px] leading-[1.9] text-[#817586] sm:text-[14px]">
@@ -122,11 +122,11 @@ export default function CartPageClient({
 
           <div className="flex flex-col justify-between gap-6 border-b border-[#EEE6EF] pb-8 sm:flex-row sm:items-end">
             <div>
-              <span className="text-secondary mb-3 block font-sans text-[11px] font-semibold tracking-[0.14em] uppercase">
+              <span className="text-gold mb-3 block font-sans text-[11px] font-semibold tracking-[0.14em] uppercase">
                 Spectrum Biosciences
               </span>
               <h1 className="section-heading">
-                Shopping Cart<span className="text-secondary">.</span>
+                Shopping Cart<span className="text-gold">.</span>
               </h1>
               <p className="mt-3 font-sans text-sm text-[#817586]">
                 {!hydrated
@@ -183,7 +183,7 @@ export default function CartPageClient({
                     type="button"
                     onClick={clearCart}
                     disabled={busy}
-                    className="group inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-[#978A9A] transition-colors hover:text-red-500 sm:text-[12px] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="group inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-[#978A9A] transition-colors hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50 sm:text-[12px]"
                   >
                     <Trash2 size={15} />
                     Clear Cart
@@ -318,12 +318,12 @@ export default function CartPageClient({
 
                     {bundleSavings > 0 && (
                       <div className="flex items-center justify-between gap-4">
-                        <span className="text-secondary flex items-center gap-2 font-sans text-[12px] font-semibold">
+                        <span className="text-gold flex items-center gap-2 font-sans text-[12px] font-semibold">
                           <Sparkles size={15} />
                           Bundle Savings
                         </span>
 
-                        <span className="text-secondary font-sans text-[13px] font-bold">
+                        <span className="text-gold font-sans text-[13px] font-bold">
                           -{formatCartMoney(bundleSavings)}
                         </span>
                       </div>
@@ -400,7 +400,7 @@ export default function CartPageClient({
 
               <Link
                 href="/shop"
-                className="group text-primary hover:text-secondary mt-5 flex items-center justify-center gap-2 font-sans text-[12px] font-semibold transition-colors"
+                className="group text-primary hover:text-gold mt-5 flex items-center justify-center gap-2 font-sans text-[12px] font-semibold transition-colors"
               >
                 <ArrowLeft
                   size={15}

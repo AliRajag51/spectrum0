@@ -59,7 +59,7 @@ export default function FloatingCart() {
       <span className="relative flex size-11 items-center justify-center rounded-full bg-white/12">
         <ShoppingBag size={20} strokeWidth={1.7} />
         {count > 0 && (
-          <span className="bg-secondary ring-primary absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold ring-2">
+          <span className="bg-gold ring-primary absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold ring-2">
             {count > 99 ? "99+" : count}
           </span>
         )}

@@ -170,7 +170,7 @@ function SectionHeading({
 }) {
   return (
     <div className="max-w-2xl">
-      <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+      <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
         {eyebrow}
       </p>
       <h2 className="section-heading">{title}</h2>
@@ -396,41 +396,28 @@ export default function PartnerProgramPage() {
 
   return (
     <main className="min-h-screen">
-      <section className="overflow-hidden border-b border-[#EEE6EF] px-4 py-6 md:py-12 sm:px-6 lg:px-10">
+      <section className="overflow-hidden border-b border-[#EEE6EF] px-4 py-6 sm:px-6 md:py-12 lg:px-10">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div>
-            <p className="text-secondary mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
+            <p className="text-gold mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
               Spectrum Partner Program
             </p>
             <h1 className="section-heading">
               Recommend research.{" "}
-              <span className="text-secondary">Grow together.</span>
+              <span className="text-gold">Grow together.</span>
             </h1>
             <p className="text-md mt-6 max-w-xl text-[#6E6173]">
               Connect your audience with Spectrum's research catalogue. Explore
               proposed commission tiers, model potential referrals, and learn
               how a responsible research partnership could work.
             </p>
-            <div className="mt-8 flex w-full items-center gap-2 sm:gap-4">
-              <Link
-                href="/contact"
-                className="group bg-primary inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-sm font-semibold whitespace-nowrap text-white transition-colors hover:bg-[#35143E] sm:h-13 sm:flex-none sm:gap-3 sm:px-7 sm:text-base"
-              >
-                Apply / Enquire
-                <ArrowUpRight
-                  size={16}
-                  className="shrink-0 transition-transform group-hover:rotate-45 sm:size-[19px]"
-                />
-              </Link>
-
-              <a
-                href="#earnings"
-                className="text-primary inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full border border-[#E0CEE4] px-2 text-sm font-semibold whitespace-nowrap transition-colors hover:bg-[#F8EFF9] sm:h-13 sm:flex-none sm:gap-2 sm:px-6 sm:text-base"
-              >
-                Estimate Earnings
-                <ArrowRight size={16} className="shrink-0 sm:size-[18px]" />
-              </a>
-            </div>
+            <Link href="/contact" className="btn-gradient mt-5">
+              Apply / Enquire
+              <ArrowUpRight
+                size={16}
+                className="shrink-0 transition-transform group-hover:rotate-45 sm:size-[19px]"
+              />
+            </Link>
             <p className="mt-5 text-sm leading-6 text-[#928494]">
               Program details below are proposed examples and require business
               approval before launch.
@@ -446,7 +433,7 @@ export default function PartnerProgramPage() {
               className="object-cover object-right"
             />
             <div className="absolute right-5 bottom-5 left-5 rounded-[18px] border border-white/70 bg-white/30 p-5 backdrop-blur-md sm:right-7 sm:bottom-7 sm:left-7">
-              <p className="text-secondary text-sm font-semibold">
+              <p className="text-gold text-sm font-semibold">
                 Built for responsible partnerships
               </p>
               <p className="font-heading text-primary mt-2 text-2xl font-bold sm:text-3xl">
@@ -491,10 +478,7 @@ export default function PartnerProgramPage() {
                 <div className="mt-6 flex-1 space-y-4 border-t border-[#E9DDEA] pt-6">
                   {tier.perks.map((perk) => (
                     <div key={perk} className="flex items-start gap-3">
-                      <Check
-                        size={19}
-                        className="text-secondary mt-0.5 shrink-0"
-                      />
+                      <Check size={19} className="text-gold mt-0.5 shrink-0" />
                       <p className="text-base leading-6 text-[#55485A]">
                         {perk}
                       </p>

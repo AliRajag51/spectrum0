@@ -10,7 +10,8 @@ import QuickView from "./QuickView";
 const PRODUCTS_PER_PAGE = 8;
 
 export default function ProductGrid() {
-  const [quickViewProduct, setQuickViewProduct] = useState<StorefrontProduct | null>(null);
+  const [quickViewProduct, setQuickViewProduct] =
+    useState<StorefrontProduct | null>(null);
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
 
   const activeProducts = useProducts();
@@ -30,10 +31,14 @@ export default function ProductGrid() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
               Explore The Collection
             </p>
             <h2 className="section-heading mt-2">Precision in Every Vial.</h2>
+            <div
+              aria-hidden="true"
+              className="my-2 h-[3px] w-28 rounded-full bg-linear-to-r from-[#A87516] via-[#FFE49A] to-[#E4A60C] shadow-[0_0_10px_rgba(228,166,12,0.2)]"
+            />
             <p className="text-muted text-md mt-2 max-w-xl font-sans">
               Discover the Spectrum Biosciences research collection.
             </p>
@@ -55,12 +60,9 @@ export default function ProductGrid() {
             <button
               type="button"
               onClick={loadMore}
-              className="group border-primary bg-primary hover:bg-primary-dark mt-7 inline-flex items-center gap-5 rounded-full border px-7 py-3.5 font-sans text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_12px_30px_rgba(85,32,95,0.2)]"
+              className="btn-gradient mt-6"
             >
               Load More Products
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-y-1">
-                <ArrowDown size={18} strokeWidth={1.8} />
-              </span>
             </button>
           ) : (
             <div className="bg-accent-light text-primary mt-7 flex items-center gap-2 rounded-full px-5 py-3 font-sans text-sm font-semibold">

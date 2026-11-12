@@ -103,13 +103,18 @@ export default function USShippingCoverage() {
       <div className="mx-auto max-w-7xl">
         <header className="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
               Shipping Coverage
             </p>
 
             <h2 id="shipping-coverage-title" className="section-heading">
-              Across the <span className="text-secondary">United States.</span>
+              Across the <span className="text-gold">United States.</span>
             </h2>
+
+            <div
+              aria-hidden="true"
+              className="my-2 h-[3px] w-28 rounded-full bg-linear-to-r from-[#A87516] via-[#FFE49A] to-[#E4A60C] shadow-[0_0_10px_rgba(228,166,12,0.2)]"
+            />
 
             <p className="text-md mt-4 max-w-xl text-[#817586]">
               Explore our illustrated domestic shipping network. Select a state
@@ -324,7 +329,7 @@ export default function USShippingCoverage() {
               aria-label="Shipping information"
               className="rounded-[18px] border border-[#E8DCEA] bg-white p-5 shadow-[0_8px_25px_rgba(85,32,95,0.04)] sm:p-6"
             >
-              <p className="text-secondary text-[11px] font-bold tracking-[0.15em] uppercase">
+              <p className="text-gold text-[11px] font-bold tracking-[0.15em] uppercase">
                 Shipping Overview
               </p>
 
@@ -340,7 +345,7 @@ export default function USShippingCoverage() {
 
               <div className="mt-5 border-t border-[#EEE6EF] pt-5">
                 <div className="flex items-center gap-2">
-                  <MapPin size={17} className="text-secondary shrink-0" />
+                  <MapPin size={17} className="text-gold shrink-0" />
 
                   <h3 className="font-heading text-primary text-[21px] font-bold">
                     {selectedCity || currentName}
@@ -376,7 +381,7 @@ export default function USShippingCoverage() {
                 <button
                   type="button"
                   onClick={() => setActiveCity(null)}
-                  className="text-secondary hover:text-primary mt-5 inline-flex items-center gap-2 text-[12px] font-semibold transition-colors"
+                  className="text-gold hover:text-primary mt-5 inline-flex items-center gap-2 text-[12px] font-semibold transition-colors"
                 >
                   Show all routes
                   <ArrowUpRight size={15} />

@@ -90,7 +90,7 @@ export default function CTASection() {
   return (
     <section
       aria-labelledby="cta-title"
-      className="relative w-full overflow-hidden bg-[#FCF6F0] px-4 pt-12 md:pt-16 sm:px-6 lg:px-10"
+      className="relative w-full overflow-hidden bg-[#f6e8ff] px-4 pt-12 sm:px-6 md:pt-16 lg:px-10"
     >
       <div className="pointer-events-none absolute top-0 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#F6E5F7]/60 blur-[120px]" />
 
@@ -99,7 +99,7 @@ export default function CTASection() {
           <h2 id="cta-title" className="section-heading">
             Your Next Discovery.
             <br />
-            <span className="text-secondary">Starts Here.</span>
+            <span className="text-gold">Starts Here.</span>
           </h2>
 
           <p className="text-md mx-auto mt-3 max-w-[480px] font-sans text-[#625765]">
@@ -108,10 +108,7 @@ export default function CTASection() {
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/shop"
-              className="group bg-primary hover:bg-primary-dark inline-flex items-center gap-3 rounded-full px-6 py-3.5 font-sans text-[12px] font-semibold text-white transition-all duration-300 hover:shadow-[0_12px_30px_rgba(85,32,95,0.2)] sm:text-[13px]"
-            >
+            <Link href="/shop" className="btn-gradient">
               Explore Collection
               <ArrowUpRight
                 size={17}

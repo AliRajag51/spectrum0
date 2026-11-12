@@ -77,7 +77,7 @@ export function ResearchDeclarationFields({
   const flagged = (key: string) => missing.includes(key);
   return (
     <fieldset className="space-y-4 rounded-xl border border-[#E8DCEA] bg-white p-4">
-      <legend className="text-secondary px-1 text-[12px] font-bold tracking-widest uppercase">
+      <legend className="text-gold px-1 text-[12px] font-bold tracking-widest uppercase">
         Research declaration
       </legend>
       <label
@@ -91,7 +91,9 @@ export function ResearchDeclarationFields({
           value={value.status}
           required
           aria-invalid={flagged("status") || undefined}
-          onChange={(event) => onChange({ ...value, status: event.target.value })}
+          onChange={(event) =>
+            onChange({ ...value, status: event.target.value })
+          }
           className={`${inputClass} mt-2`}
         >
           <option value="">Select one</option>
@@ -113,8 +115,8 @@ export function ResearchDeclarationFields({
         invalid={flagged("attest")}
         onChange={(attest) => onChange({ ...value, attest })}
       >
-        I am 21 or older and a qualified researcher purchasing solely for in vitro laboratory
-        research, not for human or veterinary use.
+        I am 21 or older and a qualified researcher purchasing solely for in
+        vitro laboratory research, not for human or veterinary use.
       </Check2>
       {flagged("attest") && (
         <p role="alert" className="text-[13px] text-red-600">
@@ -128,22 +130,32 @@ export function ResearchDeclarationFields({
         onChange={(accept) => onChange({ ...value, accept })}
       >
         I accept the{" "}
-        <Link href="/terms-and-conditions" className="text-primary font-semibold underline">
+        <Link
+          href="/terms-and-conditions"
+          className="text-primary font-semibold underline"
+        >
           Terms
         </Link>
         ,{" "}
-        <Link href="/privacy-policy" className="text-primary font-semibold underline">
+        <Link
+          href="/privacy-policy"
+          className="text-primary font-semibold underline"
+        >
           Privacy Policy
         </Link>{" "}
         and{" "}
-        <Link href="/research-disclaimer" className="text-primary font-semibold underline">
+        <Link
+          href="/research-disclaimer"
+          className="text-primary font-semibold underline"
+        >
           Research-Use-Only policy
         </Link>
         .
       </Check2>
       {flagged("accept") && (
         <p role="alert" className="text-[13px] text-red-600">
-          Accept the Terms, Privacy Policy and Research-Use-Only policy to continue.
+          Accept the Terms, Privacy Policy and Research-Use-Only policy to
+          continue.
         </p>
       )}
     </fieldset>

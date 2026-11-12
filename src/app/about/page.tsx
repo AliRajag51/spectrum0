@@ -51,69 +51,71 @@ const principles = [
 export default function AboutUsPage() {
   return (
     <main className="min-h-screen">
-      <section className="px-4 pt-6 md:pt-12 sm:px-6 lg:px-10">
-        <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-3xl bg-[#F2E2F5]">
-          <div className="relative w-full overflow-hidden">
-            <Image
-              src="/assets/about-2.png"
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 1024px) 1280px, 100vw"
-              className="hidden object-cover object-center lg:block"
-            />
-            <Image
-              src="/assets/about-mobile-1.png"
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 1023px) 100vw, 1280px"
-              className="object-cover object-bottom lg:hidden"
-            />
+      <header className="relative isolate min-h-110 overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 md:py-10 lg:min-h-90 lg:px-8">
+        {/* BACKGROUND IMAGES */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          {/* MOBILE ONLY */}
+          <Image
+            src="/assets/about-banner-mobile.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 639px) 100vw, 1px"
+            className="object-cover object-center sm:hidden"
+          />
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#F9ECFC]/45 via-transparent to-transparent lg:hidden" />
-
-            <div className="relative z-10 flex w-full flex-col items-start px-5 pt-8 pb-80 sm:px-10 sm:pt-12 sm:pb-[440px] md:px-12 md:pt-14 md:pb-120 lg:min-h-110 lg:justify-center lg:px-16 lg:py-12">
-              <div className="w-full max-w-[420px]">
-                <span className="text-primary/70 mb-3 inline-block font-sans text-[10px] font-bold tracking-[0.16em] uppercase sm:text-[11px]">
-                  Our Story
-                </span>
-
-                <h2 className="section-heading">
-                  A Different Perspective on Big{" "}
-                  <span className="text-secondary">Research.</span>
-                </h2>
-
-                <p className="text-md mt-4 max-w-[340px] font-sans leading-[1.7] text-[#4E3D52]">
-                  Spectrum Biosciences brings together research compounds,
-                  thoughtful product presentation, and accessible information in
-                  one focused collection.
-                </p>
-
-                <Link
-                  href="/shop"
-                  className="group bg-primary hover:bg-primary-dark mt-6 inline-flex items-center gap-3 rounded-full px-5 py-3 font-sans text-sm font-semibold text-white transition-all duration-300 sm:px-6 sm:py-3.5"
-                >
-                  Explore Collection
-                  <ArrowUpRight
-                    size={17}
-                    className="transition-transform duration-300 group-hover:rotate-45"
-                  />
-                </Link>
-              </div>
-            </div>
-          </div>
+          {/* TABLET + DESKTOP */}
+          <div
+            className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
+            style={{
+              backgroundImage: "url('/assets/about-banner.png')",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center center",
+            }}
+          />
         </div>
-      </section>
+
+        {/* SOFT WHITE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
+
+        {/* HEADER CONTENT */}
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
+          >
+            <Link href="/" className="hover:text-primary">
+              Home
+            </Link>
+
+            <ChevronRight size={13} />
+
+            <span className="text-primary font-semibold">About</span>
+          </nav>
+
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            Our Story
+          </p>
+
+          <h1 className="section-heading">
+            Driven by <span className="text-gold">Quality.</span>
+          </h1>
+
+          <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
+            Learn about our mission, values, and commitment to delivering
+            quality products through transparency, research, and innovation.
+          </p>
+        </div>
+      </header>
 
       <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <h2 className="section-heading">
-            Driven by <span className="text-secondary">Curiosity.</span> Defined
-            by Research.
+            Driven by <span className="text-gold">Curiosity.</span> Defined by
+            Research.
           </h2>
 
-          <div className="bg-secondary mt-6 h-[3px] w-16 rounded-full" />
+          <div className="bg-gold mt-6 h-[3px] w-16 rounded-full" />
 
           <p className="font-heading mt-8 text-[22px] leading-[1.4] font-medium tracking-[-0.04em] text-[#49374E] sm:text-[28px]">
             Every meaningful discovery starts with a question worth exploring.
@@ -141,7 +143,7 @@ export default function AboutUsPage() {
           <div className="mb-11 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <h2 className="section-heading">
-                What Guides Us<span className="text-secondary">.</span>
+                What Guides Us<span className="text-gold">.</span>
               </h2>
             </div>
             <p className="text-md max-w-[370px] text-[#817586]">
@@ -236,7 +238,7 @@ export default function AboutUsPage() {
             </div>
 
             <div className="/90 absolute bottom-[17%] left-5 z-10 hidden rounded-xl border border-white/70 px-4 py-3 shadow-sm backdrop-blur-md sm:block">
-              <span className="text-secondary text-[10px] font-bold tracking-[0.12em] uppercase">
+              <span className="text-gold text-[10px] font-bold tracking-[0.12em] uppercase">
                 Spectrum Biosciences
               </span>
               <p className="font-heading text-primary mt-1 text-[16px] font-semibold">
@@ -249,7 +251,7 @@ export default function AboutUsPage() {
             <h2 className="section-heading">
               More Than
               <br />
-              Just a <span className="text-secondary">Product.</span>
+              Just a <span className="text-gold">Product.</span>
             </h2>
 
             <p className="text-md mt-6 max-w-[470px] text-[#817586]">
@@ -267,7 +269,7 @@ export default function AboutUsPage() {
 
             <Link
               href="/coa"
-              className="group border-primary text-primary hover:border-secondary hover:text-secondary mt-8 inline-flex items-center gap-3 border-b pb-2 text-[13px] font-bold transition-colors"
+              className="group border-primary text-primary hover:border-secondary hover:text-gold mt-8 inline-flex items-center gap-3 border-b pb-2 text-[13px] font-bold transition-colors"
             >
               Explore COA Documentation
               <ArrowUpRight

@@ -9,6 +9,7 @@ import {
   Search,
   FileText,
   X,
+  ChevronRight,
 } from "lucide-react";
 
 import {
@@ -18,6 +19,7 @@ import {
   type LabReport,
 } from "@/lib/lab-reports";
 import CustomSelect from "../CustomSelect";
+import Link from "next/link";
 
 function CoACard({ report }: { report: LabReport }) {
   const lot = report.fields.find((field) => field.label === "Lot")?.value;
@@ -44,7 +46,7 @@ function CoACard({ report }: { report: LabReport }) {
         <div className="flex flex-1 flex-col p-4 sm:p-5">
           <h2
             id={report.id}
-            className="font-heading text-primary group-hover/title:text-secondary text-[16px] leading-[1.35] font-semibold tracking-[-0.04em] transition-colors sm:text-[18px]"
+            className="font-heading text-primary group-hover/title:text-gold text-[16px] leading-[1.35] font-semibold tracking-[-0.04em] transition-colors sm:text-[18px]"
           >
             {report.title}
           </h2>
@@ -104,17 +106,61 @@ export default function CoALibrary({ reports }: { reports: LabReport[] }) {
 
   return (
     <main className="min-h-screen bg-white">
-      <header className="border-b border-[#EEE6EF] px-4 py-6 sm:px-6 md:py-12 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
-            Spectrum Biosciences
+    
+
+      <header className="relative isolate min-h-110 overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 md:py-10 lg:min-h-90 lg:px-8">
+        {/* BACKGROUND IMAGES */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          {/* MOBILE ONLY */}
+          <Image
+            src="/assets/coa-banner-mobile.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 639px) 100vw, 1px"
+            className="object-cover object-center sm:hidden"
+          />
+
+          {/* TABLET + DESKTOP */}
+          <div
+            className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
+            style={{
+              backgroundImage: "url('/assets/coa-banner.png')",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center center",
+            }}
+          />
+        </div>
+
+        {/* SOFT WHITE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
+
+        {/* HEADER CONTENT */}
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
+          >
+            <Link href="/" className="hover:text-primary">
+              Home
+            </Link>
+
+            <ChevronRight size={13} />
+
+            <span className="text-primary font-semibold">COA</span>
+          </nav>
+
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            Quality & Transparency
           </p>
+
           <h1 className="section-heading">
-            Certificates of <span className="text-secondary">Analysis.</span>
+            Verified Quality, <span className="text-gold">Every Time.</span>
           </h1>
-          <p className="text-md mt-2 max-w-2xl text-[#817586]">
-            Browse the published, batch-specific Certificates of Analysis for
-            Spectrum Biosciences research products.
+
+          <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
+            Explore our Certificates of Analysis and review detailed testing
+            results to ensure product quality, purity, and consistency.
           </p>
         </div>
       </header>
@@ -156,7 +202,9 @@ export default function CoALibrary({ reports }: { reports: LabReport[] }) {
             <CustomSelect
               id="coa-category"
               value={category}
-              onChange={(event) => setCategory(event.target.value as LabCategory)}
+              onChange={(event) =>
+                setCategory(event.target.value as LabCategory)
+              }
               placeholder="Filter category"
               className="w-full sm:w-[190px] sm:shrink-0 lg:ml-auto"
               options={[

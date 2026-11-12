@@ -38,7 +38,13 @@ const socials = [
   { name: "X", href: "https://x.com", icon: "ri-twitter-x-line" },
 ];
 
-function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: FooterLink[];
+}) {
   return (
     <nav aria-label={title}>
       <h3 className="font-heading text-primary text-md mb-5 font-semibold">
@@ -77,7 +83,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#FCF6F0] text-[#29232D]">
+    <footer className="relative overflow-hidden bg-[#f6e8ff] text-[#29232D]">
       <div className="relative px-4 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="border-primary/10 grid gap-10 border-b py-14 sm:grid-cols-2 sm:gap-12 lg:grid-cols-[1.3fr_0.8fr_0.9fr_0.9fr]">
@@ -146,7 +152,7 @@ export default function Footer() {
               </Link>
 
               <span className="text-primary inline-flex items-center gap-2 font-sans text-[11px] font-semibold">
-                <FlaskConical size={14} className="text-secondary" />
+                <FlaskConical size={14} className="text-gold" />
                 Research Use Only
               </span>
             </div>

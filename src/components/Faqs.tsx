@@ -94,7 +94,7 @@ function FAQItem({
       }`}
     >
       <div
-        className={`bg-secondary absolute bottom-0 left-0 h-[2px] transition-all duration-500 ${
+        className={`bg-gold absolute bottom-0 left-0 h-[2px] transition-all duration-500 ${
           open ? "w-full" : "w-0"
         }`}
       />
@@ -110,7 +110,7 @@ function FAQItem({
         >
           <span
             className={`font-heading shrink-0 text-[12px] font-bold transition-colors duration-300 sm:text-[14px] ${
-              open ? "text-secondary" : "text-primary/30"
+              open ? "text-gold" : "text-primary/30"
             }`}
           >
             {String(index + 1).padStart(2, "0")}
@@ -175,7 +175,7 @@ export default function Faqs() {
     <section
       id="faq"
       aria-labelledby="faq-title"
-      className="relative overflow-hidden px-4 md:py-16 sm:px-6 lg:px-8"
+      className="relative overflow-hidden px-4 sm:px-6 md:py-16 lg:px-8"
     >
       <div className="pointer-events-none absolute top-1/3 -left-40 h-[450px] w-[450px] rounded-full bg-[#F6E5F7]/40 blur-[110px]" />
 
@@ -184,7 +184,7 @@ export default function Faqs() {
           <h2 id="faq-title" className="section-heading mt-2">
             Curious Minds.
             <br />
-            <span className="text-secondary">Clear Answers.</span>
+            <span className="text-gold">Clear Answers.</span>
           </h2>
 
           <p className="text-muted text-md mx-auto mt-5 max-w-[500px] font-sans">

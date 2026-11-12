@@ -155,7 +155,7 @@ export default function ResearcherGate() {
             Not a qualified researcher?{" "}
             <a
               href="https://www.google.com/"
-              className="text-primary hover:text-secondary font-semibold underline underline-offset-4"
+              className="text-primary hover:text-gold font-semibold underline underline-offset-4"
             >
               Quit Site
             </a>

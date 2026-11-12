@@ -20,7 +20,10 @@ type ProductCardProps = {
   onQuickView?: (product: StorefrontProduct) => void;
 };
 
-export default function ProductCard({ product, onQuickView }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  onQuickView,
+}: ProductCardProps) {
   const [selectedVariant, setSelectedVariant] = useState(
     product.defaultVariant ?? 0,
   );
@@ -123,7 +126,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         {/* TITLE */}
 
         <Link href={`/products/${product.slug}`} className="group/title">
-          <h3 className="font-heading text-primary group-hover/title:text-secondary text-[16px] leading-[1.35] font-semibold tracking-[-0.04em] transition-colors sm:text-[18px]">
+          <h3 className="font-heading text-primary text-[16px] leading-[1.35] font-semibold tracking-[-0.04em] transition-colors sm:text-[18px]">
             {product.name}
           </h3>
         </Link>
@@ -132,31 +135,31 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           {/* VARIANT SELECTOR */}
 
           <div className="flex flex-nowrap items-center gap-1.5 overflow-x-auto sm:gap-2">
-  {product.variants.map((item, index) => {
-    const selected = selectedVariant === index;
-    const unavailable = item.inStock === false;
+            {product.variants.map((item, index) => {
+              const selected = selectedVariant === index;
+              const unavailable = item.inStock === false;
 
-    return (
-      <button
-        key={item.id}
-        type="button"
-        disabled={unavailable}
-        onClick={() => {
-          setSelectedVariant(index);
-          setError("");
-        }}
-        aria-pressed={selected}
-        className={`min-h-8 shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap transition-all duration-300 sm:min-h-9 sm:px-3.5 sm:py-1.5 sm:text-[12px] ${
-          selected
-            ? "border-primary bg-primary text-white"
-            : "border-[#E7DCE9] bg-[#FAF7FB] text-primary hover:border-primary"
-        } ${unavailable ? "cursor-not-allowed opacity-40" : ""}`}
-      >
-        {item.label}
-      </button>
-    );
-  })}
-</div>
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  disabled={unavailable}
+                  onClick={() => {
+                    setSelectedVariant(index);
+                    setError("");
+                  }}
+                  aria-pressed={selected}
+                  className={`min-h-8 shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap transition-all duration-300 sm:min-h-9 sm:px-3.5 sm:py-1.5 sm:text-[12px] ${
+                    selected
+                      ? "border-primary bg-primary text-white"
+                      : "text-primary hover:border-primary border-[#E7DCE9] bg-[#FAF7FB]"
+                  } ${unavailable ? "cursor-not-allowed opacity-40" : ""}`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
 
           {/* PRICE */}
 
@@ -174,7 +177,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             type="button"
             onClick={handleAddToCart}
             disabled={!canAdd || adding}
-            className="bg-primary mt-2 flex h-10 w-full items-center justify-center gap-1.5 rounded-full px-2 text-sm font-semibold whitespace-nowrap text-white transition-all duration-300 hover:bg-[#35143E] disabled:cursor-not-allowed disabled:opacity-50 sm:h-11"
+            className="btn-gradient mt-2 w-full"
           >
             <span>
               {!inStock

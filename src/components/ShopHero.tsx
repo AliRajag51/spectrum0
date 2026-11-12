@@ -56,14 +56,14 @@ export default function ShopHero() {
 
         <div className="relative z-10 grid items-center lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative z-20 flex flex-col justify-center px-5 pt-10 pb-4 sm:px-8 lg:py-12 lg:pl-12">
-            <p className="text-secondary mb-3 text-xs font-bold tracking-[0.15em] uppercase">
+            <p className="text-gold mb-3 text-xs font-bold tracking-[0.15em] uppercase">
               Spectrum Biosciences
             </p>
 
             <h1 className="section-heading">
               Explore Our
               <br />
-              <span className="text-secondary">Collection.</span>
+              <span className="text-gold">Collection.</span>
             </h1>
 
             <p className="mt-4 max-w-[420px] text-sm leading-7 text-[#76677B] sm:text-base">

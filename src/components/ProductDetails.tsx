@@ -56,7 +56,8 @@ function Gallery({ product }: { product: StorefrontProduct }) {
     if (!zoom) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const close = (event: KeyboardEvent) => event.key === "Escape" && setZoom(false);
+    const close = (event: KeyboardEvent) =>
+      event.key === "Escape" && setZoom(false);
     window.addEventListener("keydown", close);
     return () => {
       document.body.style.overflow = previous;
@@ -182,7 +183,7 @@ function Packs({
     <section className="mt-7" aria-labelledby="packs-title">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-secondary text-[11px] font-bold tracking-[0.12em] uppercase">
+          <p className="text-gold text-[11px] font-bold tracking-[0.12em] uppercase">
             More bottles. More savings.
           </p>
           <h2
@@ -192,7 +193,7 @@ function Packs({
             Bundle & Save
           </h2>
         </div>
-        <span className="text-secondary rounded-full bg-[#FFF0E5] px-3 py-1.5 text-[11px] font-bold">
+        <span className="text-gold rounded-full bg-[#FFF0E5] px-3 py-1.5 text-[11px] font-bold">
           UP TO 15% OFF
         </span>
       </div>
@@ -502,11 +503,14 @@ export default function ProductDetails({
       value: variants.map((item) => item.label).join(", ") || undefined,
     },
     { label: "Intended Use", value: "In-vitro research only" },
-  ].filter((row): row is { label: string; value: string } => Boolean(row.value));
+  ].filter((row): row is { label: string; value: string } =>
+    Boolean(row.value),
+  );
 
   /* The certificate for the strength on screen, else the newest current lot. */
   const batch =
-    (variant && batches.find((item) => sameStrength(item.strength, variant.label))) ??
+    (variant &&
+      batches.find((item) => sameStrength(item.strength, variant.label))) ??
     batches[0] ??
     null;
   const certificatePdf = batch?.report ?? null;
@@ -532,7 +536,9 @@ export default function ProductDetails({
         added = await addItem(product, variant, 1, { packSize });
 
         if (added && extraBottles > 0) {
-          added = await addItem(product, variant, extraBottles, { packSize: 1 });
+          added = await addItem(product, variant, extraBottles, {
+            packSize: 1,
+          });
         }
       } else {
         added = await addItem(product, variant, quantity, { packSize: 1 });
@@ -721,7 +727,9 @@ export default function ProductDetails({
                         {product.name} Certificate of Analysis
                       </p>
                       {batch?.lot && (
-                        <p className="text-xs text-[#756B78]">Lot {batch.lot}</p>
+                        <p className="text-xs text-[#756B78]">
+                          Lot {batch.lot}
+                        </p>
                       )}
                       <a
                         href={certificatePdf}

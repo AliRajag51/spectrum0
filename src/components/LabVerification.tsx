@@ -362,7 +362,7 @@ export default function LabVerification() {
           <h2 id="verification-title" className="section-heading mt-2">
             Six Checks.
             <br />
-            <span className="text-secondary">One Clearer Record.</span>
+            <span className="text-gold">One Clearer Record.</span>
           </h2>
 
           <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#817586] sm:text-base">
@@ -408,7 +408,7 @@ export default function LabVerification() {
                       }}
                       d={connection.d}
                       fill="none"
-                      stroke="#F47735"
+                      stroke="#e4a60c"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                     />
@@ -422,7 +422,7 @@ export default function LabVerification() {
                       cx={connection.x}
                       cy={connection.y}
                       r="5"
-                      fill="#F47735"
+                      fill="#e4a60c"
                       stroke="white"
                       strokeWidth="2"
                     />
@@ -442,7 +442,7 @@ export default function LabVerification() {
               <div className="absolute inset-5 rounded-full bg-[#F2DDF5]/70 blur-[45px]" />
 
               <Image
-                src="/assets/5-amino-hero.png"
+                src="/assets/cta-1.png"
                 alt="Spectrum Biosciences research product"
                 fill
                 sizes="(max-width: 640px) 185px, (max-width: 1024px) 230px, 270px"
@@ -451,7 +451,7 @@ export default function LabVerification() {
             </div>
 
             <div className="mt-3 flex items-center gap-2 rounded-full border border-[#E8DCEA] bg-white px-4 py-2 shadow-sm sm:px-5 sm:py-2.5">
-              <span className="bg-secondary size-2 rounded-full" />
+              <span className="bg-gold size-2 rounded-full" />
 
               <span className="text-primary text-[11px] font-semibold sm:text-[12px]">
                 Spectrum Biosciences

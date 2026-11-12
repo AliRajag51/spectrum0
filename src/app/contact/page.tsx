@@ -16,6 +16,7 @@ import { Package, FileCheck2, Headphones } from "lucide-react";
 import CustomSelect from "@/components/CustomSelect";
 import { env } from "@/env";
 import { useTRPC } from "@/trpc/react";
+import Image from "next/image";
 
 declare global {
   interface Window {
@@ -120,8 +121,35 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-white">
-      <header className="border-b border-[#EEE6EF] px-4 py-6 sm:px-6 md:py-12 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+      <header className="relative isolate min-h-110 overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 md:py-10 lg:min-h-90 lg:px-8">
+        {/* BACKGROUND IMAGES */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          {/* MOBILE ONLY */}
+          <Image
+            src="/assets/contact-banner-mobile.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 639px) 100vw, 1px"
+            className="object-cover object-center sm:hidden"
+          />
+
+          {/* TABLET + DESKTOP */}
+          <div
+            className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
+            style={{
+              backgroundImage: "url('/assets/contact-banner.png')",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center center",
+            }}
+          />
+        </div>
+
+        {/* SOFT WHITE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
+
+        {/* HEADER CONTENT */}
+        <div className="relative z-10 mx-auto max-w-7xl">
           <nav
             aria-label="Breadcrumb"
             className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
@@ -129,22 +157,27 @@ export default function ContactPage() {
             <Link href="/" className="hover:text-primary">
               Home
             </Link>
+
             <ChevronRight size={13} />
+
             <span className="text-primary font-semibold">Contact</span>
           </nav>
 
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
-            Get in touch
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            Get in Touch
           </p>
+
           <h1 className="section-heading">
-            We're Here to <span className="text-secondary">Help.</span>
+            We're Here to <span className="text-gold">Help.</span>
           </h1>
-          <p className="text-md mt-3 max-w-xl text-[#817586]">
-            Have a question about a product, order, or batch documentation? Send
-            us a message.
+
+          <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
+            Have questions or need assistance? Reach out to our team, and we'll
+            be happy to help with your inquiries.
           </p>
         </div>
       </header>
+      
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8">
         <aside className="order-2 lg:order-1 lg:pt-2">
@@ -167,7 +200,7 @@ export default function ContactPage() {
                 {email ? (
                   <a
                     href={`mailto:${email}`}
-                    className="text-primary hover:text-secondary text-md mt-1 block break-all"
+                    className="text-primary hover:text-gold text-md mt-1 block break-all"
                   >
                     {email}
                   </a>
@@ -212,7 +245,7 @@ export default function ContactPage() {
             </p>
             <Link
               href="/faqs"
-              className="text-primary hover:text-secondary mt-2 inline-flex items-center gap-2 text-sm font-semibold"
+              className="text-primary hover:text-gold mt-2 inline-flex items-center gap-2 text-sm font-semibold"
             >
               Visit FAQs <ArrowUpRight size={16} />
             </Link>
@@ -266,7 +299,7 @@ export default function ContactPage() {
                   htmlFor="contact-name"
                   className="mb-2 block text-sm font-semibold text-[#29232D]"
                 >
-                  Full name <span className="text-secondary">*</span>
+                  Full name <span className="text-gold">*</span>
                 </label>
                 <input
                   id="contact-name"
@@ -284,7 +317,7 @@ export default function ContactPage() {
                   htmlFor="contact-email"
                   className="mb-2 block text-sm font-semibold text-[#29232D]"
                 >
-                  Email address <span className="text-secondary">*</span>
+                  Email address <span className="text-gold">*</span>
                 </label>
                 <input
                   id="contact-email"
@@ -327,7 +360,7 @@ export default function ContactPage() {
                 htmlFor="contact-message"
                 className="mb-2 block text-sm font-semibold text-[#29232D]"
               >
-                Your message <span className="text-secondary">*</span>
+                Your message <span className="text-gold">*</span>
               </label>
               <textarea
                 id="contact-message"
@@ -356,7 +389,7 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={send.isPending}
-              className="group bg-primary flex h-12 w-full items-center justify-center gap-3 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-[#35143E] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+              className="btn-gradient"
             >
               {send.isPending ? "Sending..." : "Send Message"}{" "}
               <ArrowUpRight
@@ -376,8 +409,8 @@ export default function ContactPage() {
               </p>
             )}
             <p className="text-[11px] leading-relaxed text-[#978A9A]">
-              Your message is sent securely to the Spectrum Biosciences team.
-              We never ask for payment details by email.
+              Your message is sent securely to the Spectrum Biosciences team. We
+              never ask for payment details by email.
             </p>
           </form>
         </section>
@@ -386,7 +419,7 @@ export default function ContactPage() {
       <section className="border-t border-[#EEE6EF] bg-[#FCFAFC] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl">
-            <p className="text-secondary mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
+            <p className="text-gold mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
               Customer Support
             </p>
             <h2 className="section-heading">How Can We Help?</h2>
@@ -441,7 +474,7 @@ export default function ContactPage() {
                   </p>
                   <Link
                     href={item.link}
-                    className="text-primary hover:text-secondary text-md mt-6 inline-flex items-center gap-2 font-semibold transition-colors"
+                    className="text-primary hover:text-gold text-md mt-6 inline-flex items-center gap-2 font-semibold transition-colors"
                   >
                     {item.action}
                     <ArrowUpRight
@@ -459,7 +492,7 @@ export default function ContactPage() {
       <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 border-b border-[#EEE6EF] pb-12 sm:flex-row sm:items-center">
           <div>
-            <p className="text-secondary mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
+            <p className="text-gold mb-3 text-[11px] font-bold tracking-[0.16em] uppercase">
               Frequently Asked Questions
             </p>
             <h2 className="section-heading">Need More Information?</h2>

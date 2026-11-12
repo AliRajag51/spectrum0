@@ -1,7 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Search,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 import { useProducts } from "@/components/providers/ProductsProvider";
 import type { StorefrontProduct } from "@/lib/storefront";
 import ShopHero from "../ShopHero";
@@ -9,10 +15,17 @@ import ProductCard from "../ProductCard";
 
 import QuickView from "../QuickView";
 import CustomSelect from "../CustomSelect";
+import Link from "next/link";
+import Image from "next/image";
 
-export default function ShopClient({ initialSearch = "" }: { initialSearch?: string }) {
+export default function ShopClient({
+  initialSearch = "",
+}: {
+  initialSearch?: string;
+}) {
   const catalog = useProducts();
-  const [quickViewProduct, setQuickViewProduct] = useState<StorefrontProduct | null>(null);
+  const [quickViewProduct, setQuickViewProduct] =
+    useState<StorefrontProduct | null>(null);
   const [search, setSearch] = useState(initialSearch);
   const [category, setCategory] = useState("All Products");
   const [sort, setSort] = useState("featured");
@@ -48,8 +61,62 @@ export default function ShopClient({ initialSearch = "" }: { initialSearch?: str
 
   return (
     <main className="min-h-screen">
-      <header>
-        <ShopHero />
+      <header className="relative isolate flex min-h-110 items-start overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-70 md:py-10 lg:min-h-90 lg:items-center lg:px-8">
+        {/* BACKGROUND IMAGES */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          {/* MOBILE ONLY */}
+          <Image
+            src="/assets/shop-banner-mobile.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 639px) 100vw, 1px"
+            className="object-cover object-center sm:hidden"
+          />
+
+          {/* TABLET + DESKTOP */}
+          <div
+            className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
+            style={{
+              backgroundImage: "url('/assets/shop-banner.png')",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center center",
+            }}
+          />
+        </div>
+
+        {/* SOFT WHITE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
+
+        {/* HEADER CONTENT */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
+          >
+            <Link href="/" className="hover:text-primary">
+              Home
+            </Link>
+
+            <ChevronRight size={13} />
+
+            <span className="text-primary font-semibold">Shop</span>
+          </nav>
+
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            Shop Our Collection
+          </p>
+
+          <h1 className="section-heading">
+            Find Your <span className="text-gold">Favorites.</span>
+          </h1>
+
+          <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
+            Discover our premium collection, carefully selected to deliver
+            quality, consistency, and an exceptional experience with every
+            purchase.
+          </p>
+        </div>
       </header>
 
       <section
@@ -95,7 +162,7 @@ export default function ShopClient({ initialSearch = "" }: { initialSearch?: str
               value={sort}
               onChange={(event) => setSort(event.target.value)}
               placeholder="Sort products"
-             className="w-full sm:w-[190px] sm:shrink-0 lg:ml-auto"
+              className="w-full sm:w-[190px] sm:shrink-0 lg:ml-auto"
               options={[
                 { value: "featured", label: "Featured" },
                 { value: "name", label: "Name A–Z" },
@@ -133,7 +200,7 @@ export default function ShopClient({ initialSearch = "" }: { initialSearch?: str
                   setSearch("");
                   setCategory("All Products");
                 }}
-                className="bg-primary mt-5 rounded-full px-5 py-3 text-xs font-semibold text-white"
+                className="btn-gradient mt-5"
               >
                 Clear filters
               </button>

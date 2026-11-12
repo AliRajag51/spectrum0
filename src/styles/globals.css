@@ -5,12 +5,13 @@
      BRAND COLORS
   ========================= */
 
-  --color-primary: #55205f;
+  --color-primary: #800098;
   --color-primary-dark: #35143e;
   --color-primary-light: #784481;
 
   --color-secondary: #f47735;
   --color-secondary-dark: #db6025;
+  --color-gold: #da981b;
 
   --color-accent: #f6e5f7;
   --color-accent-light: #fdf5fd;
@@ -45,7 +46,7 @@
   }
 
   body {
-    @apply bg-background font-sans text-text antialiased;
+    @apply bg-background text-text font-sans antialiased;
   }
 
   h1,
@@ -72,7 +73,6 @@
   }
 }
 
-
 @layer components {
   .section-heading {
     @apply font-heading text-primary font-bold;
@@ -82,18 +82,15 @@
   }
 }
 
-
 .lab-card-visible {
-  animation: spectrum-card-pop 1300ms
-    cubic-bezier(0.22, 1, 0.36, 1)
+  animation: spectrum-card-pop 1300ms cubic-bezier(0.22, 1, 0.36, 1)
     var(--pop-delay) both;
 }
 
-
-
 /* Smooth floating product animation */
 @keyframes product-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -103,7 +100,8 @@
 
 /* Floating with slight rotation */
 @keyframes product-float-rotate {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(-3deg);
   }
   50% {
@@ -113,7 +111,8 @@
 
 /* Gentle floating side to side */
 @keyframes product-sway {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0);
   }
   50% {
@@ -158,5 +157,131 @@
   .product-float-rotate,
   .product-sway {
     animation: none;
+  }
+}
+
+/* btn  */
+/* ==========================================
+   SPECTRUM PREMIUM GRADIENT BUTTON
+========================================== */
+
+.btn-gradient {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 13px 28px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+
+  color: #ffffff;
+
+  /* NEW PURPLE GRADIENT + ANIMATED GOLD BORDER */
+  background:
+    linear-gradient(135deg, #800098, #55205f) padding-box,
+    linear-gradient(120deg, #a87516, #ffe7a3, #e4a60c, #fff1bc, #a87516)
+      border-box;
+
+  background-size:
+    100% 100%,
+    300% 300%;
+
+  box-shadow:
+    0 5px 18px rgba(128, 0, 152, 0.18),
+    0 0 12px rgba(228, 166, 12, 0.1);
+
+  animation: spectrum-gold-border 4s linear infinite;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    color 0.35s ease;
+}
+
+/* SMOOTH HOVER GRADIENT */
+.btn-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+
+  background: linear-gradient(120deg, #a83ac0 0%, #800098 45%, #55205f 100%);
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn-gradient:hover::before {
+  opacity: 1;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 25px rgba(128, 0, 152, 0.28),
+    0 0 18px rgba(228, 166, 12, 0.22);
+}
+
+/* ICON ANIMATION */
+.btn-gradient svg {
+  flex-shrink: 0;
+  transition: transform 0.35s ease;
+}
+
+.btn-gradient:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* ANIMATED GOLD BORDER */
+@keyframes spectrum-gold-border {
+  0% {
+    background-position:
+      0 0,
+      0% 50%;
+  }
+
+  100% {
+    background-position:
+      0 0,
+      100% 50%;
+  }
+}
+
+/* KEYBOARD ACCESSIBILITY */
+.btn-gradient:focus-visible {
+  outline: 3px solid #e4a60c;
+  outline-offset: 4px;
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .btn-gradient {
+    animation: none;
+    transition: none;
+  }
+
+  .btn-gradient::before,
+  .btn-gradient svg {
+    transition: none;
+  }
+
+  .btn-gradient:hover {
+    transform: none;
+  }
+
+  .btn-gradient:hover svg {
+    transform: none;
   }
 }

@@ -37,7 +37,10 @@ const nav = [
 ] as const;
 
 /** The viewer fields the account pages print; nothing else reaches the browser. */
-export type AccountViewer = Pick<Viewer, "id" | "email" | "displayName" | "firstName" | "lastName">;
+export type AccountViewer = Pick<
+  Viewer,
+  "id" | "email" | "displayName" | "firstName" | "lastName"
+>;
 
 export type ResetLink = { key: string; login: string; id?: number };
 
@@ -74,7 +77,9 @@ export default function AccountClient({
   const orderId = slug === "orders" && section[1] ? Number(section[1]) : null;
   const active = nav.find((n) => n.slug === slug) ?? nav[0];
   const viewer = signedOut ? null : user;
-  const greeting = viewer ? viewer.firstName || viewer.displayName || "researcher" : "";
+  const greeting = viewer
+    ? viewer.firstName || viewer.displayName || "researcher"
+    : "";
 
   return (
     <main className="min-h-screen bg-white">
@@ -88,12 +93,12 @@ export default function AccountClient({
             <ChevronRight size={14} />
             <span className="text-primary font-semibold">My Account</span>
           </nav>
-          <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+          <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
             Spectrum Biosciences
           </p>
           <h1 className="section-heading">
             {viewer && slug !== "dashboard" ? active.label : "My Account"}
-            <span className="text-secondary">.</span>
+            <span className="text-gold">.</span>
           </h1>
           <p className="mt-2 text-[15px] text-[#817586]">
             {viewer
@@ -122,9 +127,12 @@ export default function AccountClient({
             <aside className="rounded-[22px] border border-[#ECE2ED] bg-white p-3 lg:sticky lg:top-24">
               <div className="border-b border-[#EEE6EF] p-3 pb-5">
                 <p className="text-primary text-[16px] font-bold">
-                  {`${viewer.firstName} ${viewer.lastName}`.trim() || viewer.displayName}
+                  {`${viewer.firstName} ${viewer.lastName}`.trim() ||
+                    viewer.displayName}
                 </p>
-                <p className="mt-1 truncate text-[13px] text-[#817586]">{viewer.email}</p>
+                <p className="mt-1 truncate text-[13px] text-[#817586]">
+                  {viewer.email}
+                </p>
               </div>
               <nav
                 aria-label="Account sections"
@@ -133,7 +141,11 @@ export default function AccountClient({
                 {nav.map(({ slug: navSlug, label, icon: Icon }) => (
                   <Link
                     key={navSlug}
-                    href={navSlug === "dashboard" ? "/account" : `/account/${navSlug}`}
+                    href={
+                      navSlug === "dashboard"
+                        ? "/account"
+                        : `/account/${navSlug}`
+                    }
                     className={`flex items-center gap-2 rounded-xl px-3 py-3 text-[14px] font-semibold ${active.slug === navSlug ? "bg-primary text-white" : "hover:text-primary text-[#635367] hover:bg-[#F8EFF9]"}`}
                   >
                     <Icon size={18} className="shrink-0" />
@@ -149,9 +161,13 @@ export default function AccountClient({
                 }}
                 className="mt-3 flex w-full items-center gap-3 border-t border-[#EEE6EF] px-3 py-4 text-[14px] font-semibold text-[#7A617D] disabled:opacity-50"
               >
-                <LogOut size={18} /> {signOut.isPending ? "Signing out..." : "Sign out"}
+                <LogOut size={18} />{" "}
+                {signOut.isPending ? "Signing out..." : "Sign out"}
               </button>
-              <FormError message={formError(signOut.error?.message)} className="px-3 pb-3" />
+              <FormError
+                message={formError(signOut.error?.message)}
+                className="px-3 pb-3"
+              />
             </aside>
             <div className="min-w-0 space-y-5">
               {active.slug === "dashboard" && (
@@ -170,17 +186,19 @@ export default function AccountClient({
                   <Orders limit={3} paged={false} />
                   <Panel title="Everything else">
                     <div className="grid gap-3 sm:grid-cols-2">
-                      {nav.slice(1, 5).map(({ slug: navSlug, label, icon: Icon }) => (
-                        <Link
-                          key={navSlug}
-                          href={`/account/${navSlug}`}
-                          className="text-primary flex items-center gap-3 rounded-xl border border-[#EEE6EF] p-5 text-[15px] font-semibold hover:bg-[#FCF7FD]"
-                        >
-                          <Icon size={21} />
-                          {label}
-                          <ArrowUpRight size={16} className="ml-auto" />
-                        </Link>
-                      ))}
+                      {nav
+                        .slice(1, 5)
+                        .map(({ slug: navSlug, label, icon: Icon }) => (
+                          <Link
+                            key={navSlug}
+                            href={`/account/${navSlug}`}
+                            className="text-primary flex items-center gap-3 rounded-xl border border-[#EEE6EF] p-5 text-[15px] font-semibold hover:bg-[#FCF7FD]"
+                          >
+                            <Icon size={21} />
+                            {label}
+                            <ArrowUpRight size={16} className="ml-auto" />
+                          </Link>
+                        ))}
                     </div>
                   </Panel>
                 </>
@@ -212,7 +230,9 @@ export default function AccountClient({
                 </Panel>
               )}
               {active.slug === "addresses" && <Addresses />}
-              {active.slug === "details" && <Details key={viewer.id} user={viewer} />}
+              {active.slug === "details" && (
+                <Details key={viewer.id} user={viewer} />
+              )}
               {active.slug === "password" && <ChangePasswordForm />}
               {active.slug === "payment-methods" && (
                 <Panel

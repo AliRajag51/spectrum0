@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import Marquee from "react-fast-marquee";
 import {
   Menu,
   X,
@@ -30,112 +31,143 @@ const navLinks = [
   { name: "Track Order", href: "/track-order" },
 ];
 
-const announcements = [
-  {
-    label: "SPECTRUM EXCLUSIVE",
-    highlight: "SAVE 15%",
-    text: "on selected research bundles",
-  },
-  {
-    label: "EXPLORE MORE",
-    highlight: "BUNDLE & SAVE",
-    text: "discover the Spectrum collection",
-  },
-  {
-    label: "RESEARCH ESSENTIALS",
-    highlight: "SHOP THE COLLECTION",
-    text: "find your next research essential",
-  },
-];
-
 function AnnouncementBar() {
   return (
-    <div className="relative isolate overflow-hidden bg-[#F0E1F4] py-2.5">
+    <section
+      aria-label="Spectrum announcements"
+      className="relative isolate overflow-hidden bg-[#F0E1F4] py-2.5"
+    >
+      {/* BACKGROUND GRADIENT */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#F7EAF9,#EAD6F0,#F7EAF9)]" />
 
-      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div className="announcement-track flex w-max items-center">
-          {[0, 1].map((copy) => (
-            <div
-              key={copy}
-              aria-hidden={copy === 1}
-              className="flex shrink-0 items-center gap-10 pr-10 sm:gap-14 sm:pr-14"
-            >
-              {announcements.map((item, index) => (
-                <div
-                  key={`${copy}-${index}`}
-                  className="flex shrink-0 items-center gap-4 sm:gap-6"
-                >
-                  <span className="border-primary/15 text-primary inline-flex items-center gap-2 rounded-full border bg-white/80 px-3 py-1.5 font-sans text-[9px] font-extrabold tracking-[0.13em] uppercase shadow-sm sm:text-[10px]">
-                    <span className="relative flex h-2 w-2">
-                      <span className="bg-secondary/40 absolute inset-0 animate-ping rounded-full" />
-                      <span className="bg-secondary relative h-2 w-2 rounded-full" />
-                    </span>
-                    {item.label}
-                  </span>
+      {/* STATIC CONTENT */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-5 gap-y-3 px-4 sm:gap-x-6 sm:px-6 lg:gap-x-8 lg:px-8">
+        {/* US FLAG + FIRST MESSAGE */}
+        <div className="flex shrink-0 items-center gap-3">
+          <Image
+            src="/assets/us-flag.png"
+            alt="United States"
+            width={30}
+            height={20}
+            className="h-auto w-6 object-contain"
+          />
 
-                  <span className="font-heading text-primary text-[20px] font-semibold tracking-[-0.055em] whitespace-nowrap sm:text-lg">
-                    {item.highlight}
-                  </span>
-
-                  <span className="font-heading text-primary/65 text-[15px] font-semibold whitespace-nowrap italic sm:text-[18px]">
-                    {item.text}
-                  </span>
-
-                  <Link
-                    href="/shop"
-                    tabIndex={copy === 1 ? -1 : undefined}
-                    aria-hidden={copy === 1}
-                    className="group bg-primary hover:bg-secondary inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 font-sans font-semibold text-white transition-all duration-300 sm:px-5 sm:text-sm"
-                  >
-                    Shop Now
-                    <ArrowUpRight
-                      size={15}
-                      className="transition-transform duration-300 group-hover:rotate-45"
-                    />
-                  </Link>
-
-                  <Sparkles size={18} className="text-secondary shrink-0" />
-                </div>
-              ))}
-            </div>
-          ))}
+          <span className="font-heading text-primary text-[13px] font-medium whitespace-nowrap sm:text-sm">
+            U.S. Manufacturing &amp; Fulfillment
+          </span>
         </div>
+
+        {/* GOLD SEPARATOR */}
+        <span
+          aria-hidden="true"
+          className="bg-gold hidden h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)] lg:inline-flex"
+        />
+
+        {/* SECOND MESSAGE */}
+        <span className="font-heading text-primary shrink-0 text-[13px] font-medium whitespace-nowrap sm:text-sm">
+          Third-Party Tested with COAs
+        </span>
+
+        {/* GOLD SEPARATOR */}
+        <span
+          aria-hidden="true"
+          className="bg-gold hidden h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)] lg:inline-flex"
+        />
+
+        {/* THIRD MESSAGE */}
+        <span className="font-heading text-primary shrink-0 text-[13px] font-medium whitespace-nowrap sm:text-sm">
+          Research Use Only (RUO)
+        </span>
+
+        {/* GOLD SEPARATOR */}
+        <span
+          aria-hidden="true"
+          className="bg-gold hidden h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)] lg:inline-flex"
+        />
+
+        {/* SHOP NOW BUTTON */}
+        <Link
+          href="/shop"
+          className="announcement-shop-btn group text-primary-dark relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full px-3.5 py-1.5 font-sans text-sm font-medium shadow-md"
+        >
+          <span className="relative z-10">Shop Now</span>
+
+          <ArrowRight
+            size={17}
+            className="relative z-10 transition-transform duration-500 ease-out group-hover:translate-x-1"
+          />
+        </Link>
       </div>
 
       <style jsx global>{`
-        @keyframes spectrum-announcement-scroll {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-          to {
-            transform: translate3d(-50%, 0, 0);
-          }
+        /* =========================================
+           PREMIUM GOLD BUTTON
+        ========================================= */
+
+        .announcement-shop-btn {
+          isolation: isolate;
+
+          background: linear-gradient(
+            110deg,
+            #e4a60c 0%,
+            #ffdc78 45%,
+            #e4a60c 100%
+          );
+
+          transition:
+            transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 400ms ease;
         }
 
-        .announcement-track {
-          animation: spectrum-announcement-scroll 38s linear infinite;
-          will-change: transform;
+        /* SMOOTH HOVER GRADIENT */
+        .announcement-shop-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          border-radius: inherit;
+
+          background: linear-gradient(
+            110deg,
+            #ffe49a 0%,
+            #e4a60c 45%,
+            #ffd15c 100%
+          );
+
+          opacity: 0;
+          transition: opacity 500ms ease;
         }
 
-        .announcement-track:hover,
-        .announcement-track:focus-within {
-          animation-play-state: paused;
+        .announcement-shop-btn:hover::before {
+          opacity: 1;
         }
 
-        @media (max-width: 640px) {
-          .announcement-track {
-            animation-duration: 30s;
-          }
+        .announcement-shop-btn:hover {
+          transform: translateY(-2px);
+
+          box-shadow:
+            0 6px 18px rgba(228, 166, 12, 0.3),
+            0 0 14px rgba(228, 166, 12, 0.15);
+        }
+
+        .announcement-shop-btn:focus-visible {
+          outline: 2px solid #55205f;
+          outline-offset: 3px;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .announcement-track {
-            animation: none;
+          .announcement-shop-btn,
+          .announcement-shop-btn::before,
+          .announcement-shop-btn svg {
+            transition: none;
+          }
+
+          .announcement-shop-btn:hover {
+            transform: none;
           }
         }
       `}</style>
-    </div>
+    </section>
   );
 }
 
@@ -306,7 +338,7 @@ export default function Header() {
       <AnnouncementBar />
 
       <header
-        className={`border-primary/10 sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-xl transition-shadow duration-500 ${
+        className={`border-primary/10 sticky top-0 z-50 w-full border-b bg-[#f6e8ff] backdrop-blur-xl transition-shadow duration-500 ${
           scrolled ? "shadow-[0_8px_30px_rgba(45,0,50,0.08)]" : ""
         }`}
       >
@@ -355,7 +387,7 @@ export default function Header() {
                   {link.name}
 
                   <span
-                    className={`bg-secondary absolute -bottom-2 left-0 h-[2px] rounded-full transition-all duration-300 ${
+                    className={`bg-gold absolute -bottom-2 left-0 h-[2px] rounded-full transition-all duration-300 ${
                       active ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -397,7 +429,7 @@ export default function Header() {
               <ShoppingBag size={21} strokeWidth={1.8} />
 
               {cartCount > 0 && (
-                <span className="bg-secondary absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
+                <span className="bg-gold absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
                   {cartCount > 99 ? "99+" : cartCount}
                 </span>
               )}

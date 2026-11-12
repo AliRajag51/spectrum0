@@ -110,26 +110,6 @@ function HeroIntro() {
           <ArrowUpRight size={17} />
         </span>
       </Link>
-      {/* <div className="mt-7 flex items-center gap-3">
-        <div className="flex -space-x-2">
-          {["01", "02", "03"].map((item) => (
-            <span
-              key={item}
-              className="font-heading text-primary flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#A35DB5] bg-[#F5E8F7] text-[10px] font-bold"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-        <div>
-          <p className="font-sans text-[12px] font-semibold text-white">
-            Research-focused products
-          </p>
-          <p className="font-sans text-[11px] text-white/65">
-            Explore the Spectrum collection
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 }
@@ -187,7 +167,7 @@ function FeaturedProduct({ product }: { product?: StorefrontProduct }) {
       </div>
 
       <div className="min-w-0 flex-1">
-        <span className="bg-secondary inline-flex rounded-full px-3 py-1 font-sans text-[9px] font-bold tracking-[0.1em] text-white uppercase sm:text-[10px]">
+        <span className="bg-gold inline-flex rounded-full px-3 py-1 font-sans text-[9px] font-bold tracking-[0.1em] text-white uppercase sm:text-[10px]">
           {product.badge || "Featured Product"}
         </span>
 

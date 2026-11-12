@@ -65,7 +65,7 @@ export function Button({
     <button
       type="submit"
       disabled={busy}
-      className="bg-primary inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-[14px] font-semibold text-white hover:bg-[#35143E] disabled:opacity-50"
+      className="btn-gradient"
     >
       {busy ? busyLabel : children}
       <ArrowUpRight size={17} />

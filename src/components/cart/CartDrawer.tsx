@@ -128,7 +128,7 @@ export default function CartDrawer() {
                   <button
                     type="button"
                     onClick={closeCart}
-                    className="mt-5 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+                    className="mt-5 btn-gradient"
                   >
                     Continue shopping
                   </button>
@@ -171,7 +171,7 @@ export default function CartDrawer() {
                     // Let a pending cart write land before handing the basket over.
                     if (busy) event.preventDefault();
                   }}
-                  className="bg-primary flex min-h-11 w-full items-center justify-center rounded-full px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-primary-dark aria-disabled:pointer-events-none aria-disabled:opacity-60"
+                  className="btn-gradient"
                 >
                   Proceed to Checkout
                 </a>

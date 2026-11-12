@@ -39,12 +39,22 @@ export function AuthForms({
   const trpc = useTRPC();
   const afterAuth = useAfterAuth(redirectTo);
   const [login, setLogin] = useState({ email: "", password: "" });
-  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", password: "" });
-  const [declaration, setDeclaration] = useState<DeclarationAnswers>(emptyDeclaration);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [declaration, setDeclaration] =
+    useState<DeclarationAnswers>(emptyDeclaration);
   const [missing, setMissing] = useState<string[]>([]);
 
-  const signIn = useMutation(trpc.account.signIn.mutationOptions({ onSuccess: afterAuth }));
-  const register = useMutation(trpc.account.register.mutationOptions({ onSuccess: afterAuth }));
+  const signIn = useMutation(
+    trpc.account.signIn.mutationOptions({ onSuccess: afterAuth }),
+  );
+  const register = useMutation(
+    trpc.account.register.mutationOptions({ onSuccess: afterAuth }),
+  );
 
   const changeLogin = (e: ChangeEvent<HTMLInputElement>) =>
     setLogin((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -55,7 +65,11 @@ export function AuthForms({
     e.preventDefault();
     if (signIn.isPending || register.isPending) return;
     register.reset();
-    signIn.mutate({ email: login.email.trim(), password: login.password, remember: true });
+    signIn.mutate({
+      email: login.email.trim(),
+      password: login.password,
+      remember: true,
+    });
   }
 
   function submitRegister(e: FormEvent) {
@@ -86,16 +100,20 @@ export function AuthForms({
           role="status"
           className="rounded-xl bg-[#FCF7FD] px-4 py-3 text-[14px] text-[#7A617D] lg:col-span-2"
         >
-          Online accounts are not connected on this site yet. Please contact our team for help
-          with an order.
+          Online accounts are not connected on this site yet. Please contact our
+          team for help with an order.
         </p>
       )}
       <section className="rounded-[22px] border border-[#ECE2ED] bg-white p-6 sm:p-9">
-        <span className="text-secondary text-[13px] font-bold tracking-widest uppercase">
+        <span className="text-gold text-[13px] font-bold tracking-widest uppercase">
           Existing record
         </span>
-        <h2 className="font-heading text-primary mt-3 text-[32px] font-bold">Welcome back.</h2>
-        <p className="mt-2 text-[15px] text-[#817586]">Sign in with the email you order with.</p>
+        <h2 className="font-heading text-primary mt-3 text-[32px] font-bold">
+          Welcome back.
+        </h2>
+        <p className="mt-2 text-[15px] text-[#817586]">
+          Sign in with the email you order with.
+        </p>
         <form onSubmit={submitSignIn} className="mt-7 space-y-5">
           <Field
             label="Email"
@@ -118,17 +136,22 @@ export function AuthForms({
             <Button busy={signIn.isPending} busyLabel="Signing in...">
               Sign in
             </Button>
-            <Link href="/account/lost-password" className="text-primary text-[14px] font-semibold">
+            <Link
+              href="/account/lost-password"
+              className="text-primary text-[14px] font-semibold"
+            >
               Forgot password?
             </Link>
           </div>
         </form>
       </section>
       <section className="rounded-[22px] border border-[#ECE2ED] bg-[#FCF9FD] p-6 sm:p-9">
-        <span className="text-secondary text-[13px] font-bold tracking-widest uppercase">
+        <span className="text-gold text-[13px] font-bold tracking-widest uppercase">
           New to Spectrum?
         </span>
-        <h2 className="font-heading text-primary mt-3 text-[32px] font-bold">Open an Account.</h2>
+        <h2 className="font-heading text-primary mt-3 text-[32px] font-bold">
+          Open an Account.
+        </h2>
         <p className="mt-2 text-[15px] leading-7 text-[#817586]">
           Order history and batch certificates, filed under one address.
         </p>
@@ -202,8 +225,8 @@ export function LostPasswordForm() {
       >
         {request.isSuccess ? (
           <p role="status" className="text-primary text-[14px] leading-7">
-            If an account matches those details, a reset link is on its way. Check your inbox
-            (and spam folder) for an email from us.
+            If an account matches those details, a reset link is on its way.
+            Check your inbox (and spam folder) for an email from us.
           </p>
         ) : (
           <form
@@ -227,10 +250,16 @@ export function LostPasswordForm() {
             </Button>
           </form>
         )}
-        <Link href="/account" className="text-primary mt-5 inline-block text-[14px] font-semibold">
+        <Link
+          href="/account"
+          className="text-primary mt-5 inline-block text-[14px] font-semibold"
+        >
           Back to sign in
         </Link>
-        <FormError message={formError(request.error?.message)} className="mt-4" />
+        <FormError
+          message={formError(request.error?.message)}
+          className="mt-4"
+        />
       </Panel>
     </div>
   );

@@ -215,11 +215,11 @@ export default function HeaderSearch({ open, onClose }: HeaderSearchProps) {
         {/* PRODUCT INFORMATION */}
 
         <div className="min-w-0 flex-1">
-          <span className="text-secondary font-sans text-[9px] font-bold tracking-[0.12em] uppercase">
+          <span className="text-gold font-sans text-[9px] font-bold tracking-[0.12em] uppercase">
             {product.category || "Research Compound"}
           </span>
 
-          <h3 className="font-heading text-primary group-hover:text-secondary mt-1 truncate text-[14px] font-bold tracking-[-0.03em] transition-colors sm:text-[16px]">
+          <h3 className="font-heading text-primary group-hover:text-gold mt-1 truncate text-[14px] font-bold tracking-[-0.03em] transition-colors sm:text-[16px]">
             {product.name}
           </h3>
 
@@ -334,7 +334,7 @@ export default function HeaderSearch({ open, onClose }: HeaderSearchProps) {
                 ? `View ${searchResults[0].name}`
                 : "No matching product"
             }
-            className="bg-primary hover:bg-secondary flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 hover:rotate-45 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:rotate-0"
+            className="bg-primary hover:bg-gold flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 hover:rotate-45 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:rotate-0"
           >
             <ArrowRight size={19} />
           </button>
@@ -363,7 +363,7 @@ export default function HeaderSearch({ open, onClose }: HeaderSearchProps) {
             <div className="py-5">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Search size={15} className="text-secondary" />
+                  <Search size={15} className="text-gold" />
 
                   <h2 className="font-sans text-[11px] font-bold tracking-[0.13em] text-[#756B78] uppercase">
                     Search Results
@@ -407,7 +407,7 @@ export default function HeaderSearch({ open, onClose }: HeaderSearchProps) {
                       setQuery("");
                       inputRef.current?.focus();
                     }}
-                    className="text-primary hover:text-secondary mt-4 font-sans text-[12px] font-bold underline underline-offset-4"
+                    className="text-primary hover:text-gold mt-4 font-sans text-[12px] font-bold underline underline-offset-4"
                   >
                     Clear Search
                   </button>

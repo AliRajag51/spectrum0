@@ -95,7 +95,9 @@ export default function QuickView({ product, onClose }: QuickViewProps) {
         added = await addItem(product, variant, 1, { packSize });
 
         if (added && extraBottles > 0) {
-          added = await addItem(product, variant, extraBottles, { packSize: 1 });
+          added = await addItem(product, variant, extraBottles, {
+            packSize: 1,
+          });
         }
       } else {
         added = await addItem(product, variant, quantity, { packSize: 1 });
@@ -215,7 +217,7 @@ export default function QuickView({ product, onClose }: QuickViewProps) {
                 Bundle & Save
               </h3>
 
-              <span className="text-secondary rounded-full bg-[#FFF0E5] px-3 py-1.5 font-sans text-[10px] font-bold">
+              <span className="text-gold rounded-full bg-[#fffde5] px-3 py-1.5 font-sans text-[10px] font-bold">
                 Up to 15% OFF
               </span>
             </div>
@@ -331,7 +333,7 @@ export default function QuickView({ product, onClose }: QuickViewProps) {
                   type="button"
                   onClick={handleAddToCart}
                   disabled={!canAdd}
-                  className="group bg-primary flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-2 font-sans text-sm font-semibold whitespace-nowrap text-white transition-colors hover:bg-[#35143E] disabled:cursor-not-allowed disabled:opacity-50 sm:gap-2 sm:px-4"
+                  className="btn-gradient w-full"
                 >
                   <span>
                     {!inStock

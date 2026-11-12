@@ -39,7 +39,7 @@ const features: Feature[] = [
     number: "03",
     icon: Truck,
     title: "Fast US Shipping",
-    description: "Quick and reliable delivery across Europe.",
+    description: "Quick and reliable delivery across US.",
   },
   {
     number: "04",
@@ -95,7 +95,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
       className="group relative isolate flex flex-col rounded-[20px] p-[1.5px] transition-transform duration-300 hover:-translate-y-1 sm:rounded-[26px]"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[20px] sm:rounded-[26px]">
-        <div className="absolute inset-[-100%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0%,transparent_65%,#55205F_78%,#F47735_86%,#D69CE0_94%,transparent_100%)] motion-reduce:animate-none" />
+        <div className="absolute inset-[-100%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0%,transparent_60%,#A87516_72%,#E4A60C_82%,#FFE49A_90%,#FFF3C6_95%,transparent_100%)] motion-reduce:animate-none" />
       </div>
 
       <div className="relative z-10 flex h-full flex-col overflow-hidden rounded-[18.5px] bg-white p-4 transition-colors duration-300 group-hover:bg-[#FCF6FD] sm:rounded-[24.5px] sm:p-6 lg:p-8">
@@ -149,7 +149,7 @@ export default function WhyChooseUs() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col justify-between gap-6 lg:mb-8 lg:flex-row lg:items-end">
           <div data-aos="fade-up">
-            <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+            <p className="text-gold mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
               The Spectrum Difference
             </p>
 
