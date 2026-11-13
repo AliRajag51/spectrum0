@@ -6,11 +6,11 @@
   bottom: max(20px, env(safe-area-inset-bottom));
   z-index: 57;
   display: grid;
-  width: 40px;
+  width: 48px;
   height: 48px;
   padding: 0;
   border: 0;
-  border-radius: 18px;
+  border-radius: 180px;
   background: var(--color-primary);
   color: #fff;
   cursor: pointer;
@@ -239,7 +239,7 @@
   gap: 10px;
   height: 54px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 999px;
   background: var(--color-secondary);
   color: #fff;
   cursor: pointer;

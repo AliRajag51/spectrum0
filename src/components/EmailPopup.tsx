@@ -217,7 +217,7 @@ export default function EmailPopup() {
                   </span>
                 </label>
                 <input className={styles.trap} name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-                <button className={styles.submit} type="submit" disabled={subscribe.isPending}>
+                <button className="btn-gradient" type="submit" disabled={subscribe.isPending}>
                   {subscribe.isPending ? "Subscribing" : "Subscribe"}
                   <ArrowRight aria-hidden="true" size={17} />
                 </button>

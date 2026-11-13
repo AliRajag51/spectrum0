@@ -619,7 +619,7 @@ export default function ProductDetails({
                     type="button"
                     disabled={!canAdd}
                     onClick={handleAddToCart}
-                    className="bg-primary flex h-10 w-full items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold text-white transition-all hover:bg-[#35143E] disabled:cursor-not-allowed disabled:opacity-50 sm:h-13"
+                    className="btn-gradient w-full"
                   >
                     <ShoppingBag size={17} className="shrink-0" />
                     <span>{canAdd ? "Add to Cart" : "Unavailable"}</span>

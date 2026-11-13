@@ -121,7 +121,7 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-white">
-      <header className="relative isolate min-h-110 overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 md:py-10 lg:min-h-90 lg:px-8">
+      <header className="relative isolate flex min-h-110 items-start overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 lg:min-h-70 lg:items-center lg:px-8">
         {/* BACKGROUND IMAGES */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           {/* MOBILE ONLY */}
@@ -149,10 +149,10 @@ export default function ContactPage() {
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-white/35 via-white/10 to-transparent" />
 
         {/* HEADER CONTENT */}
-        <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
           <nav
             aria-label="Breadcrumb"
-            className="mb-6 flex items-center gap-2 text-xs text-[#95879A]"
+            className="mb-4 flex items-center gap-2 text-xs text-[#95879A]"
           >
             <Link href="/" className="hover:text-primary">
               Home
@@ -168,8 +168,13 @@ export default function ContactPage() {
           </p>
 
           <h1 className="section-heading">
-            We're Here to <span className="text-gold">Help.</span>
+            We're Here to <span className="text-gold"> Help.</span>
           </h1>
+
+          <div
+            aria-hidden="true"
+            className="my-2 h-[3px] w-28 rounded-full bg-linear-to-r from-[#A87516] via-[#FFE49A] to-[#E4A60C] shadow-[0_0_10px_rgba(228,166,12,0.2)]"
+          />
 
           <p className="text-md mt-3 text-gray-800 md:max-w-sm lg:max-w-xl">
             Have questions or need assistance? Reach out to our team, and we'll
@@ -177,7 +182,6 @@ export default function ContactPage() {
           </p>
         </div>
       </header>
-      
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8">
         <aside className="order-2 lg:order-1 lg:pt-2">

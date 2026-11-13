@@ -155,10 +155,7 @@ export default function HomePage() {
                   created for laboratory research.
                 </p>
 
-                <Link
-                  href="/shop"
-                  className="btn-gradient mt-3"
-                >
+                <Link href="/shop" className="btn-gradient mt-3">
                   Explore Collection
                   <ArrowUpRight
                     size={17}

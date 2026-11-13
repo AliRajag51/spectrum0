@@ -31,6 +31,68 @@ const navLinks = [
   { name: "Track Order", href: "/track-order" },
 ];
 
+function AnnouncementContent() {
+  return (
+    <div className="flex shrink-0 items-center gap-5 pr-5 sm:gap-6 sm:pr-6 lg:gap-8 lg:pr-0">
+      {/* US FLAG + FIRST MESSAGE */}
+      <div className="flex shrink-0 items-center gap-3">
+        <Image
+          src="/assets/us-flag.png"
+          alt="United States"
+          width={30}
+          height={20}
+          className="h-auto w-6 object-contain"
+        />
+
+        <span className="font-heading text-primary text-[13px] font-medium whitespace-nowrap sm:text-sm">
+          U.S. Manufacturing &amp; Fulfillment
+        </span>
+      </div>
+
+      {/* GOLD SEPARATOR */}
+      <span
+        aria-hidden="true"
+        className="bg-gold inline-flex h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)]"
+      />
+
+      {/* SECOND MESSAGE */}
+      <span className="font-heading text-primary shrink-0 text-[13px] font-medium whitespace-nowrap sm:text-sm">
+        Third-Party Tested with COAs
+      </span>
+
+      {/* GOLD SEPARATOR */}
+      <span
+        aria-hidden="true"
+        className="bg-gold inline-flex h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)]"
+      />
+
+      {/* THIRD MESSAGE */}
+      <span className="font-heading text-primary shrink-0 text-[13px] font-medium whitespace-nowrap sm:text-sm">
+        Research Use Only (RUO)
+      </span>
+
+      {/* GOLD SEPARATOR */}
+      <span
+        aria-hidden="true"
+        className="bg-gold inline-flex h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)]"
+      />
+
+      {/* SHOP NOW BUTTON */}
+      <Link
+        href="/shop"
+        className="announcement-shop-btn group text-primary-dark relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full px-3.5 py-1.5 font-sans text-sm font-medium shadow-md"
+      >
+        <span className="relative z-10">Shop Now</span>
+
+        <ArrowRight
+          size={17}
+          className="relative z-10 transition-transform duration-500 ease-out group-hover:translate-x-1"
+        />
+      </Link>
+    </div>
+  );
+}
+
 function AnnouncementBar() {
   return (
     <section
@@ -40,63 +102,23 @@ function AnnouncementBar() {
       {/* BACKGROUND GRADIENT */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#F7EAF9,#EAD6F0,#F7EAF9)]" />
 
-      {/* STATIC CONTENT */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-5 gap-y-3 px-4 sm:gap-x-6 sm:px-6 lg:gap-x-8 lg:px-8">
-        {/* US FLAG + FIRST MESSAGE */}
-        <div className="flex shrink-0 items-center gap-3">
-          <Image
-            src="/assets/us-flag.png"
-            alt="United States"
-            width={30}
-            height={20}
-            className="h-auto w-6 object-contain"
-          />
-
-          <span className="font-heading text-primary text-[13px] font-medium whitespace-nowrap sm:text-sm">
-            U.S. Manufacturing &amp; Fulfillment
-          </span>
-        </div>
-
-        {/* GOLD SEPARATOR */}
-        <span
-          aria-hidden="true"
-          className="bg-gold hidden h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)] lg:inline-flex"
-        />
-
-        {/* SECOND MESSAGE */}
-        <span className="font-heading text-primary shrink-0 text-[13px] font-medium whitespace-nowrap sm:text-sm">
-          Third-Party Tested with COAs
-        </span>
-
-        {/* GOLD SEPARATOR */}
-        <span
-          aria-hidden="true"
-          className="bg-gold hidden h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)] lg:inline-flex"
-        />
-
-        {/* THIRD MESSAGE */}
-        <span className="font-heading text-primary shrink-0 text-[13px] font-medium whitespace-nowrap sm:text-sm">
-          Research Use Only (RUO)
-        </span>
-
-        {/* GOLD SEPARATOR */}
-        <span
-          aria-hidden="true"
-          className="bg-gold hidden h-[7px] w-[7px] shrink-0 rotate-45 shadow-[0_0_8px_rgba(228,166,12,0.35)] lg:inline-flex"
-        />
-
-        {/* SHOP NOW BUTTON */}
-        <Link
-          href="/shop"
-          className="announcement-shop-btn group text-primary-dark relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full px-3.5 py-1.5 font-sans text-sm font-medium shadow-md"
+      {/* MOBILE + TABLET: MARQUEE */}
+      <div className="relative z-10 lg:hidden">
+        <Marquee
+          speed={35}
+          gradient={false}
+          pauseOnHover
+          pauseOnClick
+          autoFill
+          direction="left"
         >
-          <span className="relative z-10">Shop Now</span>
+          <AnnouncementContent />
+        </Marquee>
+      </div>
 
-          <ArrowRight
-            size={17}
-            className="relative z-10 transition-transform duration-500 ease-out group-hover:translate-x-1"
-          />
-        </Link>
+      {/* DESKTOP: STATIC */}
+      <div className="relative z-10 mx-auto hidden w-full max-w-7xl items-center justify-center px-8 lg:flex">
+        <AnnouncementContent />
       </div>
 
       <style jsx global>{`
