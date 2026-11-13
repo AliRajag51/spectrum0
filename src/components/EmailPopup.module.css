@@ -26,7 +26,7 @@
   right: 7px;
   width: 5px;
   height: 5px;
-  border-radius: 50%;
+  border-radius: 100%;
   background: var(--color-secondary);
 }
 
@@ -323,7 +323,7 @@
   .tab {
     left: max(14px, env(safe-area-inset-left));
     bottom: max(14px, env(safe-area-inset-bottom));
-    width: 38px;
+    width: 44px;
     height: 44px;
   }
   .card {

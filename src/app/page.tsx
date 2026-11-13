@@ -56,7 +56,7 @@ export default function HomePage() {
               <h1
                 id="hero-heading"
                 data-hero-heading
-                className="text-primary max-w-[620px] text-[clamp(2.5rem,10vw,3.3rem)] leading-[1.05] font-bold tracking-[-0.045em] sm:text-[clamp(2.8rem,5vw,4rem)] lg:text-[clamp(3.6rem,4.5vw,5rem)]"
+                className="text-primary max-w-[620px] text-[clamp(2.1rem,8.5vw,2.8rem)] leading-[1.05] font-bold tracking-[-0.045em] sm:text-[clamp(2.8rem,5vw,4rem)] lg:text-[clamp(3.6rem,4.5vw,5rem)]"
                 style={{
                   fontFamily: "Georgia, 'Times New Roman', serif",
                 }}
@@ -92,7 +92,7 @@ export default function HomePage() {
               {/* BUTTON */}
               <div
                 data-hero-buttons
-                className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 lg:justify-start"
+                className="mt-3 flex flex-wrap items-center justify-center gap-3 sm:mt-8 lg:justify-start"
               >
                 <Link href="/shop" className="btn-gradient">
                   Explore Collection

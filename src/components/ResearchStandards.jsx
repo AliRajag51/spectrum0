@@ -21,7 +21,7 @@ const standards = [
   },
   {
     title: "Research Use Only (RUO)",
-    icon: "/assets/lord/flask.json",
+    icon: "/assets/lord/tested.json",
   },
 ];
 
