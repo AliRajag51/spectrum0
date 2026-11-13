@@ -11,6 +11,10 @@ export type ProductSpecs = {
   cas?: string;
   molecularWeight?: string;
   molecularFormula?: string;
+  sequence?: string;
+  purity?: string;
+  form?: string;
+  storage?: string;
 };
 
 // A <br> in a cell, kept as a line break once the cell's own whitespace is collapsed.
@@ -49,6 +53,10 @@ export function productSpecs(description: string): ProductSpecs {
     else if (!specs.molecularWeight && /^Molecular Weight/i.test(label)) specs.molecularWeight = value;
     // "Molecular Formula" or "Molecular Formula (combined range)", never a merged "Sequence ... Molecular Formula" cell.
     else if (!specs.molecularFormula && /^Molecular Formula/i.test(label)) specs.molecularFormula = value;
+    else if (!specs.sequence && /^Sequence/i.test(label)) specs.sequence = value;
+    else if (!specs.purity && /^Purity/i.test(label)) specs.purity = value;
+    else if (!specs.form && /^(Form|Appearance)/i.test(label)) specs.form = value;
+    else if (!specs.storage && /^Storage/i.test(label)) specs.storage = value;
   }
   return specs;
 }

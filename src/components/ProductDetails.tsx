@@ -400,6 +400,8 @@ function ProductAccordion({
   );
 }
 
+const SAMPLE_COA = "/assets/certificate.pdf";
+
 type ProductDetailsProps = {
   product: StorefrontProduct;
   /** The lots on sale, newest first, from the lab report feed. */
@@ -498,6 +500,10 @@ export default function ProductDetails({
     { label: "CAS Number", value: specs.cas },
     { label: "Molecular Weight", value: specs.molecularWeight },
     { label: "Molecular Formula", value: specs.molecularFormula },
+    { label: "Sequence", value: specs.sequence },
+    { label: "Purity", value: specs.purity },
+    { label: "Form", value: specs.form },
+    { label: "Storage", value: specs.storage },
     {
       label: "Strengths",
       value: variants.map((item) => item.label).join(", ") || undefined,
@@ -513,7 +519,9 @@ export default function ProductDetails({
       batches.find((item) => sameStrength(item.strength, variant.label))) ??
     batches[0] ??
     null;
-  const certificatePdf = batch?.report ?? null;
+  /* Until WordPress publishes a lot's certificate, show the sample COA, labeled as one. */
+  const isSampleCertificate = !batch?.report;
+  const certificatePdf = batch?.report ?? SAMPLE_COA;
 
   const changeVariant = (index: number) => {
     setVariantIndex(index);
@@ -725,6 +733,7 @@ export default function ProductDetails({
                       <FileText size={34} className="text-primary/60" />
                       <p className="font-heading text-primary text-sm font-semibold">
                         {product.name} Certificate of Analysis
+                        {isSampleCertificate && " (Sample)"}
                       </p>
                       {batch?.lot && (
                         <p className="text-xs text-[#756B78]">
@@ -742,6 +751,11 @@ export default function ProductDetails({
                       </a>
                     </div>
 
+                    {isSampleCertificate && (
+                      <p className="text-primary hidden bg-[#F6E5F7] px-4 py-2 text-center text-xs font-semibold md:block">
+                        Sample certificate shown. The lot-specific COA will appear here once published.
+                      </p>
+                    )}
                     {/* Desktop: PDF Viewer */}
                     <div className="relative hidden aspect-[5/7] w-full md:block">
                       <iframe
