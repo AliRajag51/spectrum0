@@ -83,7 +83,7 @@ export default function HomePage() {
               {/* DESCRIPTION */}
               <p
                 data-hero-description
-                className="mx-auto mt-4 max-w-120 font-sans text-sm leading-[1.7] sm:mt-6 sm:text-[16px] lg:mx-0"
+                className="mx-auto mt-2 max-w-120 font-sans text-sm leading-[1.7] sm:mt-6 sm:text-[16px] lg:mx-0"
               >
                 Explore a new standard in research peptides, where scientific
                 curiosity meets a commitment to quality and precision.
