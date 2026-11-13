@@ -1,0 +1,2 @@
+# Preserve PDF bytes, including their cross-reference offsets, on Windows.
+*.pdf binary

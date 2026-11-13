@@ -48,3 +48,6 @@ yarn-error.log*
 # local account data (removed)
 .local-data/
 .env*
+
+# Generated sample COA (copied into public/assets by scripts/generate-sample-coa.py)
+/output/

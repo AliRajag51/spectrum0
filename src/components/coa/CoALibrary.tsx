@@ -20,6 +20,8 @@ import {
 } from "@/lib/lab-reports";
 import CustomSelect from "../CustomSelect";
 import Link from "next/link";
+import ProductCard from "../ProductCard";
+import type { StorefrontProduct } from "@/lib/storefront";
 
 function CoACard({ report }: { report: LabReport }) {
   const lot = report.fields.find((field) => field.label === "Lot")?.value;
@@ -34,7 +36,7 @@ function CoACard({ report }: { report: LabReport }) {
               alt={report.title}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className={`${report.sample ? "object-contain p-8" : "object-cover"} transition-transform duration-500 group-hover:scale-105`}
             />
           ) : (
             <div className="text-primary/40 flex h-full items-center justify-center text-sm">
@@ -52,6 +54,11 @@ function CoACard({ report }: { report: LabReport }) {
           </h2>
 
           <div className="mt-4 flex flex-wrap gap-2">
+            {report.sample && (
+              <span className="text-primary rounded-full border border-[#E8DCEA] bg-[#F8F0FA] px-3 py-1.5 text-[11px] font-semibold">
+                Sample document
+              </span>
+            )}
             {report.purity && (
               <span className="border-primary bg-primary rounded-full border px-3 py-1.5 text-[11px] font-semibold text-white">
                 {report.purity} purity
@@ -63,6 +70,13 @@ function CoACard({ report }: { report: LabReport }) {
               </span>
             )}
           </div>
+
+          {report.sample && (
+            <p className="mt-3 text-xs leading-5 text-[#817586]">
+              Preview our COA format. Illustrative only; not a lab-issued
+              certificate or proof of testing.
+            </p>
+          )}
 
           {report.pending ? (
             <span className="text-primary/70 mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[#E8DCEA] px-4 text-sm font-semibold">
@@ -77,7 +91,7 @@ function CoACard({ report }: { report: LabReport }) {
               aria-describedby={report.id}
               className="bg-primary mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#35143E]"
             >
-              View COA
+              {report.sample ? "View sample COA" : "View COA"}
             </a>
           )}
         </div>
@@ -86,7 +100,13 @@ function CoACard({ report }: { report: LabReport }) {
   );
 }
 
-export default function CoALibrary({ reports }: { reports: LabReport[] }) {
+export default function CoALibrary({
+  reports,
+  sampleProducts = [],
+}: {
+  reports: LabReport[];
+  sampleProducts?: StorefrontProduct[];
+}) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<LabCategory>("all");
   /* Only offer the categories that actually have a report. */
@@ -233,9 +253,22 @@ export default function CoALibrary({ reports }: { reports: LabReport[] }) {
             </div>
           ) : filtered.length ? (
             <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filtered.map((report) => (
-                <CoACard key={report.id} report={report} />
-              ))}
+              {filtered.map((report) =>
+                report.sample &&
+                sampleProducts.find(
+                  (product) => `sample-${product.id}` === report.id,
+                ) ? (
+                  <ProductCard
+                    key={report.id}
+                    product={sampleProducts.find(
+                      (product) => `sample-${product.id}` === report.id,
+                    )!}
+                    certificate={{ href: report.coa, label: "View sample COA" }}
+                  />
+                ) : (
+                  <CoACard key={report.id} report={report} />
+                ),
+              )}
             </div>
           ) : (
             <div className="flex min-h-64 flex-col items-center justify-center text-center">
@@ -261,7 +294,8 @@ export default function CoALibrary({ reports }: { reports: LabReport[] }) {
           <p className="mt-12 flex items-start gap-2 border-t border-[#EEE6EF] pt-5 text-xs leading-6 text-[#817586]">
             <FileCheck2 size={17} className="text-primary mt-0.5 shrink-0" />
             Certificates are issued per batch by the testing laboratory and
-            reflect the lot named on each report. Research use only.
+            reflect the lot named on each report. Sample documents are labeled
+            and contain no verified test results. Research use only.
           </p>
         </div>
       </section>

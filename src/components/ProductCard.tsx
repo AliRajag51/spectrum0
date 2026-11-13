@@ -18,11 +18,13 @@ import { formatMoney, type StorefrontProduct } from "@/lib/storefront";
 type ProductCardProps = {
   product: StorefrontProduct;
   onQuickView?: (product: StorefrontProduct) => void;
+  certificate?: { href: string; label: string };
 };
 
 export default function ProductCard({
   product,
   onQuickView,
+  certificate,
 }: ProductCardProps) {
   const [selectedVariant, setSelectedVariant] = useState(
     product.defaultVariant ?? 0,
@@ -78,20 +80,28 @@ export default function ProductCard({
 
         {/* QUICK VIEW */}
 
-        <button
-          type="button"
-          onClick={() => onQuickView?.(product)}
-          aria-label={`Quick view ${product.name}`}
-          className="text-primary hover:bg-primary absolute top-2 right-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/80 bg-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-110 hover:text-white sm:top-4 sm:right-4 sm:h-11 sm:w-11"
-        >
-          <Eye size={17} strokeWidth={1.7} className="sm:h-5 sm:w-5" />
-        </button>
+        {!certificate && (
+          <button
+            type="button"
+            onClick={() => onQuickView?.(product)}
+            aria-label={`Quick view ${product.name}`}
+            className="text-primary hover:bg-primary absolute top-2 right-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/80 bg-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-110 hover:text-white sm:top-4 sm:right-4 sm:h-11 sm:w-11"
+          >
+            <Eye size={17} strokeWidth={1.7} className="sm:h-5 sm:w-5" />
+          </button>
+        )}
 
         {/* IMAGE LINK */}
 
         <Link
-          href={`/products/${product.slug}`}
-          aria-label={`View ${product.name}`}
+          href={certificate?.href ?? `/products/${product.slug}`}
+          target={certificate ? "_blank" : undefined}
+          rel={certificate ? "noopener noreferrer" : undefined}
+          aria-label={
+            certificate
+              ? `${certificate.label} for ${product.name}`
+              : `View ${product.name}`
+          }
           className="relative flex h-full w-full items-center justify-center"
         >
           {product.image ? (
@@ -125,7 +135,12 @@ export default function ProductCard({
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         {/* TITLE */}
 
-        <Link href={`/products/${product.slug}`} className="group/title">
+        <Link
+          href={certificate?.href ?? `/products/${product.slug}`}
+          target={certificate ? "_blank" : undefined}
+          rel={certificate ? "noopener noreferrer" : undefined}
+          className="group/title"
+        >
           <h3 className="font-heading text-primary text-[16px] leading-[1.35] font-semibold tracking-[-0.04em] transition-colors sm:text-[18px]">
             {product.name}
           </h3>
@@ -137,7 +152,7 @@ export default function ProductCard({
           <div className="flex flex-nowrap items-center gap-1.5 overflow-x-auto sm:gap-2">
             {product.variants.map((item, index) => {
               const selected = selectedVariant === index;
-              const unavailable = item.inStock === false;
+              const unavailable = !certificate && item.inStock === false;
 
               return (
                 <button
@@ -161,42 +176,60 @@ export default function ProductCard({
             })}
           </div>
 
-          {/* PRICE */}
+          {certificate ? (
+            <a
+              href={certificate.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${certificate.label} for ${product.name}, ${variant?.label ?? "sample"}`}
+              className="btn-gradient mt-2 w-full"
+            >
+              <span>{certificate.label}</span>
+              <ArrowUpRight size={15} className="shrink-0" />
+            </a>
+          ) : (
+            <>
+              {/* PRICE */}
 
-          <div className="mt-3 flex items-center justify-between border-t border-[#F0E8F1] pt-3">
-            <div>
-              <p className="font-heading text-primary text-[20px] font-bold tracking-tight">
-                {price != null ? formatMoney(price) : "Price pending"}
-              </p>
-            </div>
-          </div>
+              <div className="mt-3 flex items-center justify-between border-t border-[#F0E8F1] pt-3">
+                <div>
+                  <p className="font-heading text-primary text-[20px] font-bold tracking-tight">
+                    {price != null ? formatMoney(price) : "Price pending"}
+                  </p>
+                </div>
+              </div>
 
-          {/* ADD TO CART */}
+              {/* ADD TO CART */}
 
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            disabled={!canAdd || adding}
-            className="btn-gradient mt-2 w-full"
-          >
-            <span>
-              {!inStock
-                ? "Out of Stock"
-                : !hasPrice
-                  ? "Unavailable"
-                  : adding
-                    ? "Adding..."
-                    : "Add to Cart"}
-            </span>
-            {canAdd && <ArrowUpRight size={15} className="shrink-0" />}
-          </button>
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={!canAdd || adding}
+                className="btn-gradient mt-2 w-full"
+              >
+                <span>
+                  {!inStock
+                    ? "Out of Stock"
+                    : !hasPrice
+                      ? "Unavailable"
+                      : adding
+                        ? "Adding..."
+                        : "Add to Cart"}
+                </span>
+                {canAdd && <ArrowUpRight size={15} className="shrink-0" />}
+              </button>
 
-          {/* ERROR MESSAGE */}
+              {/* ERROR MESSAGE */}
 
-          {error && (
-            <p role="alert" className="mt-3 font-sans text-[11px] text-red-600">
-              {error}
-            </p>
+              {error && (
+                <p
+                  role="alert"
+                  className="mt-3 font-sans text-[11px] text-red-600"
+                >
+                  {error}
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>

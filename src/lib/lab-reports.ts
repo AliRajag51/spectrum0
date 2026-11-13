@@ -4,6 +4,8 @@ import { matchesCompoundSearch } from "./search-aliases.ts";
    published feed; the shape is the one this file used to read out of a
    checked-in JSON file, so the components never had to change. */
 export type LabReport = {
+  /** Demonstration documents are labeled separately from lab-issued reports. */
+  sample?: boolean;
   category: string;
   coa: string;
   fields: { label: string; value: string }[];
