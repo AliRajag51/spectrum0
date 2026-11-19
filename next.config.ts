@@ -29,6 +29,10 @@ const config: NextConfig = {
       { source: "/products/cagrilintide", destination: "/products/sb-cg", permanent: true },
       { source: "/products/eloralintinde", destination: "/products/sb-el", permanent: true },
       { source: "/products/eloralintide", destination: "/products/sb-el", permanent: true },
+      { source: "/product/cagrilintide", destination: "/products/sb-cg", permanent: true },
+      { source: "/product/eloralintinde", destination: "/products/sb-el", permanent: true },
+      // Old WooCommerce product addresses (/product/<slug>) land on the storefront page.
+      { source: "/product/:slug", destination: "/products/:slug", permanent: true },
     ];
   },
   async headers() {
