@@ -105,7 +105,7 @@ export default function OrderTracker() {
         <div className="pointer-events-none absolute inset-0 -z-10">
           {/* MOBILE ONLY */}
           <Image
-            src="/assets/order-banner-mobile.png"
+            src="/assets/order-banner-mobile.jpeg"
             alt=""
             fill
             priority
@@ -117,7 +117,7 @@ export default function OrderTracker() {
           <div
             className="absolute inset-0 hidden bg-[#F8E9FA] bg-no-repeat sm:block"
             style={{
-              backgroundImage: "url('/assets/order-banner.png')",
+              backgroundImage: "url('/assets/order-banner.jpeg')",
               backgroundSize: "100% auto",
               backgroundPosition: "center center",
             }}
