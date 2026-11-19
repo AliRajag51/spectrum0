@@ -157,16 +157,16 @@ export const snapshotProducts: SnapshotProduct[] = [
   },
   {
     id: "7",
-    slug: "cagrilintide",
-    name: "Cagrilintide",
+    slug: "sb-cg",
+    name: "SB-CG",
     category: "Research Peptides",
     description:
-      "Research peptide supplied for controlled scientific investigation of biochemical pathways.",
-    image: "/products/Cagrilintide.webp",
+      "SB-CG is supplied for laboratory research use only. Not for human consumption.",
+    image: "/products/sb-cg.webp",
     badge: null,
     variants: [
       {
-        id: "cagrilintide-10mg",
+        id: "sb-cg-10mg",
         label: "10mg",
         price: 99,
         compareAt: 119,
@@ -217,16 +217,16 @@ export const snapshotProducts: SnapshotProduct[] = [
   },
   {
     id: "10",
-    slug: "eloralintinde",
-    name: "Eloralintinde",
+    slug: "sb-el",
+    name: "SB-EL",
     category: "Research Peptides",
     description:
-      "Research compound supplied for laboratory investigation and analytical applications.",
-    image: "/products/eloralintinde.webp",
+      "SB-EL is supplied for laboratory research use only. Not for human consumption.",
+    image: "/products/sb-el.webp",
     badge: null,
     variants: [
       {
-        id: "eloralintinde-10mg",
+        id: "sb-el-10mg",
         label: "10mg",
         price: 119,
         compareAt: 139,

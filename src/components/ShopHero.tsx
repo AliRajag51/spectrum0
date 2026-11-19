@@ -15,7 +15,7 @@ import {
 const heroProducts = [
   { id: 1, name: "BPC-157", image: "/assets/cta-1.png" },
   { id: 2, name: "BPC + KPV", image: "/assets/cta-2.png" },
-  { id: 3, name: "Cagrilintide", image: "/assets/cta-3.png" },
+  { id: 3, name: "SB-CG", image: "/assets/cta-3.png" },
   { id: 4, name: "5-Amino 1-MQ", image: "/assets/cta-4.png" },
   { id: 5, name: "5-Amino 1-MQ", image: "/assets/cta-5.png" },
 ];

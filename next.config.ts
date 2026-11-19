@@ -23,6 +23,14 @@ const config: NextConfig = {
   poweredByHeader: false,
   eslint: { ignoreDuringBuilds: true },
   images: { remotePatterns: wooImagePatterns() },
+  async redirects() {
+    // Renamed for the PRISM review: old product addresses move permanently.
+    return [
+      { source: "/products/cagrilintide", destination: "/products/sb-cg", permanent: true },
+      { source: "/products/eloralintinde", destination: "/products/sb-el", permanent: true },
+      { source: "/products/eloralintide", destination: "/products/sb-el", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
