@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/research-disclaimer" },
   title: "Research Disclaimer | Spectrum Biosciences",
   description: "Research use information and product limitations.",
 };

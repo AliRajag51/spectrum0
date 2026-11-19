@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms-and-conditions" },
   title: "Terms & Conditions | Spectrum Biosciences",
   description: "Website terms and conditions for Spectrum Biosciences.",
 };

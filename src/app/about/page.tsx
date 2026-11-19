@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/about" },
   title: "About Us | Spectrum Biosciences",
   description:
     "Discover Spectrum Biosciences and our approach to research products, product information, and laboratory documentation.",
@@ -51,7 +52,7 @@ const principles = [
 export default function AboutUsPage() {
   return (
     <main className="min-h-screen">
-      <header className="relative isolate flex min-h-110 items-start overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 lg:min-h-70 lg:items-center lg:px-8">
+      <header className="relative isolate flex min-h-110 items-start overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 lg:min-h-[max(340px,30vw)] lg:items-center lg:px-8">
         {/* BACKGROUND IMAGES */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           {/* MOBILE ONLY */}

@@ -5,6 +5,7 @@ import { getCatalog } from "@/server/catalog";
 import { toStorefrontProduct } from "@/lib/storefront";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/coa" },
   title: "Certificates of Analysis | Spectrum Biosciences",
   description:
     "Browse available batch-specific Certificates of Analysis for Spectrum Biosciences research products.",

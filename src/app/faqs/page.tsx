@@ -3,6 +3,7 @@ import { ArrowUpRight, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 export const metadata = {
+  alternates: { canonical: "/faqs" },
   title: "Frequently Asked Questions | Spectrum Biosciences",
   description:
     "Answers about Spectrum Biosciences research products, orders, shipping, and batch documentation.",
@@ -84,7 +85,7 @@ const groups = [
 export default function FAQsPage() {
   return (
     <main className="min-h-screen bg-white">
-      <header className="relative isolate flex min-h-110 items-start overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 lg:min-h-70 lg:items-center lg:px-8">
+      <header className="relative isolate flex min-h-110 items-start overflow-hidden border-b border-[#EEE6EF] px-4 py-10 sm:min-h-80 sm:px-6 md:min-h-30 lg:min-h-[max(340px,30vw)] lg:items-center lg:px-8">
         {/* BACKGROUND IMAGES */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           {/* MOBILE ONLY */}

@@ -3,6 +3,7 @@ import ShopClient from "@/components/shop/ShopClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/shop" },
   title: "Shop Research Products | Spectrum Biosciences",
   description: "Browse the Spectrum Biosciences research product collection.",
 };

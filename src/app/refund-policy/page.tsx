@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/refund-policy" },
   title: "Refund Policy | Spectrum Biosciences",
   description: "Refund and return information for Spectrum Biosciences.",
 };
