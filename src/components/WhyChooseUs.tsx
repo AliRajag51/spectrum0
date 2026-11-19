@@ -26,7 +26,7 @@ const features: Feature[] = [
   {
     number: "01",
     icon: BadgeCheck,
-    title: "Lab-Tested Every Batch",
+    title: "Every Batch Lab-Tested",
     description: "Independently tested for quality and purity.",
   },
   {
@@ -50,7 +50,7 @@ const features: Feature[] = [
   {
     number: "05",
     icon: Headset,
-    title: "Support 08:00 – 20:00",
+    title: "8AM - 8PM CST",
     description: "Friendly support whenever you need help.",
   },
   {

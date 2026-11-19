@@ -15,12 +15,47 @@ import "@/styles/globals.css";
 
 export function generateMetadata(): Metadata {
   const indexable = indexingEnabled();
+
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
+
     title: "Spectrum Biosciences | Premium Research Peptides",
+
     description:
       "Explore premium research peptides from Spectrum Biosciences. Discover precision-focused products developed for laboratory research.",
-    robots: { index: indexable, follow: indexable },
+
+    robots: {
+      index: indexable,
+      follow: indexable,
+    },
+
+    // WhatsApp, Facebook, LinkedIn previews
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: env.NEXT_PUBLIC_SITE_URL,
+      siteName: "Spectrum Biosciences",
+      title: "Spectrum Biosciences | Premium Research Peptides",
+      description:
+        "Explore premium research peptides from Spectrum Biosciences. Discover precision-focused products developed for laboratory research.",
+      images: [
+        {
+          url: "/og-image.jpeg",
+          width: 1200,
+          height: 630,
+          alt: "Spectrum Biosciences",
+        },
+      ],
+    },
+
+    // X / Twitter preview
+    twitter: {
+      card: "summary_large_image",
+      title: "Spectrum Biosciences | Premium Research Peptides",
+      description:
+        "Explore premium research peptides from Spectrum Biosciences.",
+      images: ["/og-image.jpeg"],
+    },
   };
 }
 
